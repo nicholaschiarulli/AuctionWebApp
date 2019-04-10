@@ -1,0 +1,60 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+pageEncoding="ISO-8859-1" import="com.cs336.pkg.*"%>
+<%@ page import="java.io.*,java.util.*,java.sql.*"%>
+<%@ page import="javax.servlet.http.*,javax.servlet.*"%>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<link rel="stylesheet" type="text/css" href="css/index.css"/>
+<title>CR Page</title>
+</head>
+<body>
+<h1>Hello customerRep</h1>
+
+
+<p>Reset Password</p>
+<table border='4'>
+	<tr><td>Things to do</td></tr>
+	<%
+	ApplicationDB db = new ApplicationDB();	
+	
+		Connection con = db.getConnection();
+	
+		Statement state = con.createStatement();
+	  	
+		String str = "select content from Email where toCol='CR'";
+		
+		ResultSet rst = state.executeQuery(str);
+		while(rst.next()){
+			
+			String fromCol = rst.getString("fromCol");
+			
+			String content = rst.getString("content");
+			out.print("<tr><th>"+content + "</th></tr>");
+				
+		}
+		//Close the connection. Don't forget to do it, otherwise you're keeping the resources of the server allocated.
+		con.close();
+	
+	%>
+</table>
+<form method="post" action="reset.jsp">
+
+<table>
+<tr>
+<td>Email:</td><td><input type="text" name="email"></td>
+</tr>
+
+<tr>
+<td>New Password:</td><td><input type="password" name="newpassword"></td>
+</tr>
+</table>
+<br>
+<input type="submit" value="submit">
+</form>
+
+<p><a href='logout.jsp'>Log out</a></p>
+</body>
+</html>

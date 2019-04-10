@@ -1,0 +1,81 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+pageEncoding="ISO-8859-1" import="com.cs336.pkg.*"%>
+<%@ page import="java.io.*,java.util.*,java.sql.*"%>
+<%@ page import="javax.servlet.http.*,javax.servlet.*"%>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>AP</title>
+</head>
+<body>
+<%
+String emailOfSeller = ""+session.getAttribute("username");
+String name = request.getParameter("name");
+String condition = request.getParameter("condition");
+String type = request.getParameter("type");
+String brand = request.getParameter("brand");
+String size = request.getParameter("size");
+String color = request.getParameter("color");
+String startingPrice = request.getParameter("startingPrice");
+String increment = request.getParameter("increment");
+String closingdate = request.getParameter("closingDate");
+String secretMinPrice = request.getParameter("secretMinPrice");
+Timestamp datePosted = new Timestamp(System.currentTimeMillis());
+int status = 0;
+		
+		
+if(name.isEmpty()){
+out.print("<p>You did not fill in all the fields. Please go back and try again.</p>");
+}else{
+	
+try {
+ApplicationDB db = new ApplicationDB();	
+Connection con = db.getConnection();
+
+Statement stmt = con.createStatement();
+
+String insert = "INSERT INTO jewelry (name, condition, color, type, size, brand, datePosted, emailOfSeller,status) values (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+
+PreparedStatement ps = con.prepareStatement(insert);
+				
+ps.setString(1, name);
+ps.setString(2, condition);
+ps.setString(4, color);
+ps.setString(6,type);
+ps.setString(7, size);
+ps.setString(8, brand);
+ps.setTimestamp(10, datePosted);
+ps.setString(11,emailOfSeller);
+ps.setInt(12, status);
+ps.executeUpdate();
+				
+String str = "select jewelryID from jewelry where emailOfSeller = '"+ emailOfSeller +"' order by datePosted desc limit 1";
+ResultSet result = stmt.executeQuery(str);
+if(result.next()){
+					
+int jewelryID = result.getInt("jewelryID");	 
+					
+insert="INSERT INTO infoOfBid values (?, ?, ?, ?, ?)";
+PreparedStatement ps1 = con.prepareStatement(insert);
+ps1.setInt(1, jewelryID);
+ps1.setInt(2, Integer.parseInt(startingPrice));
+ps1.setTimestamp(3, Timestamp.valueOf(closingdate.replace("T", " ")+":00"));
+ps1.setInt(4, Integer.parseInt(increment));
+ps1.setInt(5, Integer.parseInt(secretMinPrice));
+ps1.executeUpdate();
+					
+			
+}
+con.close();
+out.print("<p>Your jewelry will now appear in searches.</p>");
+} catch (Exception x) {
+out.print(x);
+}
+}
+%>
+<p><a href='sellerDash.jsp'>Click this link to go back to the seller dashboard</a></p>
+
+</body>
+</html>

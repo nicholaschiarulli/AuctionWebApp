@@ -13,7 +13,7 @@ public class ApplicationDB {
 	public Connection getConnection(){
 		
 		//Create a connection string
-		String connectionUrl = "jdbc:mysql://auctiondb.coab5jepywet.us-east-2.rds.amazonaws.com:3306/BarBeerDrinkerSample";
+		String connectionUrl = "jdbc:mysql://auctiondb.coab5jepywet.us-east-2.rds.amazonaws.com:3306/Auction";
 		Connection connection = null;
 		
 		try {
@@ -24,7 +24,7 @@ public class ApplicationDB {
 			e.printStackTrace();
 		} catch (IllegalAccessException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			e.printStackTrace();  
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

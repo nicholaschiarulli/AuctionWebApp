@@ -1,0 +1,54 @@
+body {
+	background-image: linear-gradient(to right, #ff6e7f , #bfe9ff) ;
+ /* background-color: #bfe9ff; */
+  color: white;
+  margin: 20px;
+  padding: 20px;
+ 
+} 
+
+/* .button {
+  background-image: linear-gradient(to right, #77A1D3 , #79CBCA,#E684AE ) ;
+  border: none;
+  color: black;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  width: 33%;
+  font-size: 16px;
+  
+} */
+
+.button {
+  display: block;
+width: 250px;
+  border: none;
+  background-color: #729fcf;
+/* background-image: linear-gradient(to right, #77A1D3 , #79CBCA,#E684AE ) ; */
+  padding: 10px 10px;
+   font-size: 16px;
+   
+  cursor: pointer;
+  
+ text-align: center; 
+}
+
+.button1 {
+  display: block;
+width: 50px;
+  border: none;
+background-color: blue;
+  padding: 10px 10px;
+   font-size: 12px;
+  cursor: pointer;
+ text-align: center; 
+}
+/* #form {
+  display: block;
+  width: 50%;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+  text-align: center;
+} */
