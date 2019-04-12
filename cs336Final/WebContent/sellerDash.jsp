@@ -58,7 +58,7 @@ con.close();
 %>
 <br>
 <br>
-<b>Auction Information Table</b>
+<b>EMAIL FROM BUYME</b>
 <br>
 <br>
 <table border='4'>
