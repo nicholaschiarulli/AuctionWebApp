@@ -1,0 +1,43 @@
+CREATE DEFINER=`nickchiarulli`@`%` TRIGGER `Auction`.`CurrentBid_AFTER_INSERT` 
+AFTER INSERT ON `CurrentBid` 
+FOR EACH ROW
+BEGIN
+	IF(new.jewelryID in (select jewelryID from Auto))
+    then begin
+    declare i int;
+    declare n int;
+    declare email varchar(45);
+    declare max int;
+    declare jewelryId int;
+    declare inc int;
+    declare done int default false;
+    
+    declare crsr CURSOR FOR select * from Auto where Auto.jewelryID = new.jewelryID;
+    DECLARE CONTINUE HANDLER FOR NOT FOUND SET done = TRUE;
+    
+    set inc = (select i.increment from infoOfBid as i where i.jewelryId = new.jewelryId);
+    set i = 1;
+    set n = (select count(*) from Auto where Auto.jewelryID = new.jewelryID);
+    open crsr;
+    
+    while i <= n do
+    begin
+		set i = i + 1;
+		FETCH NEXT FROM crsr into email, jewelryId, max;
+        if(email <> new.email)
+        then begin
+			if(max >= (new.cost + inc))
+            then begin
+				insert into Bid(duration, cost, jewelryId, email) values 
+                ((select current_timestamp()), (new.cost + inc), new.jewelryId, email);
+            end;
+            end if; -- cost checker
+        end;
+        end if; -- email checker
+    end;
+    end while;
+    
+    close crsr;
+    end;
+    end if;
+END$$

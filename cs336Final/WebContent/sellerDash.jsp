@@ -27,7 +27,10 @@ if(email.equals(email_username)){
 out.println("<h2>Welcome Seller! Sell some items please!</h2>");
 out.println("<br>");
 out.println("<br>");
-out.println("<table border='4'><tr ><th>Jewelry Name</th><th>Current Bidding Amount $</th><th>Closing Date/Time</th></tr>");
+out.println("<b>Items you have put up for auction</b>");
+out.println("<br>");
+out.println("<br>");
+out.println("<table border='4'><tr><th>Jewelry Name</th><th>Current Bidding Amount $</th><th>Closing Date/Time</th></tr>");
 con = db.getConnection();
 stmt = con.createStatement();
 str = "SELECT j.name, j.jewelryID, iob.closingDate FROM infoOfBid as iob join jewelry as j on j.jewelryID = iob.jewelryID WHERE emailOfSeller = '" + email_username + "';";
@@ -50,10 +53,46 @@ out.print("<tr><th><a href='jewelryPage.jsp?id=" + id + "'>" +name + "</a></th>"
 out.print("<th> $"+ currentCost + "</th>");
 out.print("<th>"+ closingDate + "</th></tr>");
 }
-out.println("</table>");
+out.print("</table>");
+con.close();
+%>
+<br>
+<br>
+<b>Auction Information Table</b>
+<br>
+<br>
+<table border='4'>
+<tr>
+<td>Type Of notification</td>
+<td>ID of jewelry</td>
+<td>Content</td>
+<td>Time</td>
+</tr>
+<%
+Connection con1 = db.getConnection();
+Statement stmt3 = con1.createStatement();
+	 
+str = "SELECT name, id, content, timeOF FROM auctionInfo WHERE email='"+session.getAttribute("username")+"'";
+ResultSet result2 = stmt3.executeQuery(str);
+while(result2.next()){
+String name = result2.getString("name");
+String id = result2.getString("id");
+String content = result2.getString("content");
+String time = result2.getString("timeOF");
+out.print("<tr><th>" +name + "</th>");
+out.print("<th>" + id +"</th>");
+out.print("<th>"+content + "</th>");
+out.print("<th>"+time+"</th></tr>");    
+}
+%>
+</table>
+<br>
+<br>
+<%
+
 out.println("<p><a href='auction.jsp'>Put an item up for auction!</a><p>");
 			
-con.close();
+con1.close();
 }
 }
 else{
@@ -69,6 +108,7 @@ out.println("error");
 %>
 
 <p><a href='dash.jsp'>Click this link for the basic dashboard</a></p>
+<p><a href='sellerHistory.jsp'>Click to see your seller history</a></p>
 <p><a href='logout.jsp'>Log out</a></p>
 </body>
 </html>

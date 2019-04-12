@@ -1,3 +1,4 @@
+
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 pageEncoding="ISO-8859-1" import="com.cs336.pkg.*"%>
 <%@ page import="java.io.*,java.util.*,java.sql.*"%>
@@ -21,44 +22,27 @@ out.println("Hello Customer Representative  " + email_username);
 <table border="4">
 <tr><td>Things to do</td></tr>
 <%
-ApplicationDB db = new ApplicationDB();	
-	
+ApplicationDB db = new ApplicationDB();    
+    
 Connection con = db.getConnection();
-
 Statement state = con.createStatement();
- 	
+	 
 String str = "select content, fromCol from Email where toCol='CR'";
-
 ResultSet result = state.executeQuery(str);
 while(result.next()){
-			
+   		 
 String fromCol = result.getString("fromCol");
-
 String content = result.getString("content");
 out.print("<tr><th>"+content +"   FROM:   "+  fromCol+ "</th></tr>");
-				
+   			 
 }
 con.close();
-	
+    
 %>
 </table>
 <br>
 <br>
-<b>Reset Password</b>
-<form method="post" action="reset.jsp">
 
-<table border="4">
-<tr>
-<td>Customer Email:</td><td><input type="text" name="email"></td>
-</tr>
-
-<tr>
-<td>New Password:</td><td><input type="password" name="password"></td>
-</tr>
-</table>
-<br>
-<input type="submit" value="submit" class="button">
-</form>
 
 <br>
 <br>
@@ -82,14 +66,29 @@ con.close();
 <br>
 
 <b>Remove Illegal Auction</b>
-<form method="post" action="rmauc.jsp">
+<form method="post" action="auctionRemove.jsp">
 <table border="4">
 <tr>
 <td>ID of Jewelry:</td><td><input type="text" name="jewelryID"></td>
 </tr>
-
 </table>
+<br>
+<input type="submit" value="submit" class="button">
+</form>
 
+
+<b>Reset Password</b>
+<form method="post" action="reset.jsp">
+
+<table border="4">
+<tr>
+<td>Customer Email:</td><td><input type="text" name="email"></td>
+</tr>
+
+<tr>
+<td>New Password:</td><td><input type="password" name="password"></td>
+</tr>
+</table>
 <br>
 <input type="submit" value="submit" class="button">
 </form>

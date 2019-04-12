@@ -19,7 +19,7 @@ Connection con = DB.getConnection();
 String str = "UPDATE customer SET password='"+newPasswordParam+"' where email = '"+emailParam+"';";
 PreparedStatement ps = con.prepareStatement(str);
 ps.executeUpdate();
-out.println("Succesful");
+out.println("Successful");
 } catch (Exception x){
 out.println("User not found");
 }

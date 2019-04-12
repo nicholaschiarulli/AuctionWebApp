@@ -14,6 +14,23 @@ pageEncoding="ISO-8859-1" import="com.cs336.pkg.*"%>
 <form method="post" action="auctionPost.jsp">
 <table border="4">
 
+
+<tr>
+<td>Starting Price</td><td><input type="number" name="startingPrice" min="0"></td>
+</tr>
+
+<tr>
+<td>Increment</td><td><input type="number" name="increment" min="0"></td>
+</tr>
+
+<tr>
+<td>Closing date/time</td><td><input type="datetime-local"  name="closingDate"></td>
+</tr>
+
+<tr>
+<td>Minimum price</td><td><input type="number" name="secretMinPrice" min="0"></td>
+</tr>
+
 <tr>
 <td>Jewelry name</td><td><input type="text" name="name"></td>
 </tr>
@@ -71,21 +88,6 @@ pageEncoding="ISO-8859-1" import="com.cs336.pkg.*"%>
 
 
 
-<tr>
-<td>Starting Price</td><td><input type="number" name="startingPrice" min="0"></td>
-</tr>
-
-<tr>
-<td>Increment</td><td><input type="number" name="increment" min="0"></td>
-</tr>
-
-<tr>
-<td>Closing date/time</td><td><input type="datetime-local"  name="closingDate"></td>
-</tr>
-
-<tr>
-<td>Minimum price</td><td><input type="number" name="secretMinPrice" min="0"></td>
-</tr>
 
 </table>
 <br>

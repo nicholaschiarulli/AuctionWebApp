@@ -11,24 +11,28 @@ pageEncoding="ISO-8859-1" import="com.cs336.pkg.*"%>
 <title>Search</title>
 </head>
 <body>
-<p>Search for Jewelry</p>
-
+<b>Search for Jewelry</b>
+<br>
+<br>
 <form method="post" action="searchItemsPage.jsp">
 <table border="4">
 		
 <tr>
-<td>Search by Keyword</td><td><input type="text" name="keyword"></td>
+<td>Filter by this Word</td><td><input type="text" name="thisWord"></td>
 </tr>
 </table>
+<br>
+<br>
+<b>Filter jewelry by</b>
 <br>
 <br>
 <table border="4">
 <tr>
 <td>Type</td><td><select name=type size=1>
 <option value=""></option>
-<option value="Rings">Rings</option>
-<option value="Necklaces">Necklaces</option>
-<option value="Earrings">Earrings</option>
+<option value="ring">ring</option>
+<option value="necklace">necklace</option>
+<option value="earring">earring</option>
 </select></td>
 </tr>
 	
@@ -71,7 +75,11 @@ pageEncoding="ISO-8859-1" import="com.cs336.pkg.*"%>
 	
 	
 </table>
-<p>Choose an option to sort by</p>
+<br>
+<br>
+<b>Choose an option to sort by</b>
+<br>
+<br>
 <table border="4">
 <tr>
 <td>Sorting By</td><td><select name="sort" size=1>

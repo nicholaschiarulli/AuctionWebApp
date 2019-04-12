@@ -17,7 +17,7 @@ if(passwordParam.isEmpty() || emailParam.isEmpty()) {
 out.println("Password or email field was empty. Please fill both in.");
 } 
 else {
-try {
+try { 
 		
 ApplicationDB db = new ApplicationDB();	
 Connection con = db.getConnection();

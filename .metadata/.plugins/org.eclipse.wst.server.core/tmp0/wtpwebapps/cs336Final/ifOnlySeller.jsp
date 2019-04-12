@@ -22,7 +22,7 @@ if(result.next()){
 if(result.getString("emailOfSeller").equals(email)){
 out.println("You cannot place a bid on your own item!");
 //	out.print("below are two links. You can either head back to the jewelry page or become a buyer as well!");
-out.println("<a href='jewelryPage.jsp?id=" + jewelryID + "'>Cick This To Go Back/a>");
+out.println("<a href='jewelryPage.jsp?id=" + jewelryID + "'>Cick This To Go Back To The Item</a>");
 //out.println("<a href='becomeBuyer.jsp'>Become a buyer as well</a>");
 } /* else if(result1.next()) {
 out.println("<a href='becomeBuyer.jsp'>Become a buyer as well</a>");

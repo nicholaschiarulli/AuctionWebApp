@@ -6,7 +6,6 @@ pageEncoding="ISO-8859-1" import="com.cs336.pkg.*"%>
 <html>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <link rel="stylesheet" type="text/css" href="css/index.css"/>
-
 <title>Seller's History</title>
 </head>
 <body>
@@ -25,7 +24,7 @@ try {
 	
 	Statement stmt = con.createStatement();
 	
-	String email_username = request.getParameter("id");; //"jack@gmail.com";
+	String email_username = request.getParameter("id"); //"jack@gmail.com";
 	out.println(email_username);
 	
 	String str = "SELECT p.JID,p.datePosted, j.name FROM Post as p, jewelry as j WHERE seller_email=" + "'"+email_username+"' and p.JID = j.jewelryID;" ;

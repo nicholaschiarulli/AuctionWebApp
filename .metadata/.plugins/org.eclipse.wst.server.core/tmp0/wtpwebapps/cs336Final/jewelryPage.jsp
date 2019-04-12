@@ -10,7 +10,9 @@
 <title>Jewelry</title>
 </head>
 <body>
-<%!
+
+<% 
+
 String name = "";
 String condition = "";
 String color = "";
@@ -23,8 +25,6 @@ String currentBid = "";
 int startingPrice = 0;
 int increment = 0;
 int status = 0;
-%>
-<% 
 int jewelryID = Integer.parseInt(request.getParameter("id"));
 ApplicationDB db = new ApplicationDB();	
 Connection con = db.getConnection();
@@ -60,7 +60,7 @@ con.close();
 		
 %>
 
-<table>
+<table border = "4">
 <tr>
 <td>Name: </td><td><%=name %></td>
 </tr>
@@ -102,6 +102,13 @@ out.println("<p><a href='sellerHistory.jsp?id="+emailOfSeller+"'>Click this link
 out.println("<p><a href='similar.jsp?id="+jewelryID+"&type="+type+"'>Click this link to see similar items</a></p>");
 out.println("<p><a href='searchItems.jsp'>Back to searching jewelry</a></p>");
 out.println("<p><a href='dash.jsp'>Buyer Dashboard</a></p>");
+}
+else{
+	out.println("<h2>THIS ITEM'S AUCTION ENDED</h2>");
+	out.println("<p><a href='dash.jsp'>Buyer/basic Dashboard</a></p>");
+	out.println("<p><a href='sellerDash.jsp'>Seller Dashboard</a></p>");
+
+	
 }
 %>
 <p><a href='logout.jsp'>Log out</a></p>

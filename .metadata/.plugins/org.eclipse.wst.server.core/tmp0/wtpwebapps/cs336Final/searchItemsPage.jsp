@@ -10,11 +10,11 @@ pageEncoding="ISO-8859-1" import="com.cs336.pkg.*"%>
 <title>SearchItemsPage</title>
 </head>
 <body>
-<p>Jewelry available based off of your filters</p>
+<h1>Jewelry available based off of your filters. If an item is clickable then you can bid on it!</h1>
 
 <table border="4">
 <tr>
-<th>Click The Item Name</th>
+<th>Click the item name</th>
 <th>Current Bid</th>
 <th>Closing date</th>
 </tr>
@@ -25,15 +25,15 @@ Connection con = db.getConnection();
 Statement stmt = con.createStatement();
 String type = request.getParameter("type");
 String sort = request.getParameter("sort");
-String keyword =request.getParameter("keyword");
+String thisWord =request.getParameter("thisWord");
 String condition = request.getParameter("condition");
 String color = request.getParameter("color");
 	
-if(keyword.isEmpty()){
-keyword = "";
+if(thisWord.isEmpty()){
+	thisWord = "";
 } 
 else {
-keyword = " and j.name like '%"+keyword+"%'";
+	thisWord = " and j.name like '%"+thisWord+"%'";
 }
 if(type.isEmpty()){
 type = "";
@@ -60,16 +60,17 @@ else {
 sort = " order by "+ sort;
 }
 			
-String str = "SELECT j.jewelryID FROM jewelry as j WHERE j.status=0"+keyword+type+condition+color+sort;
+String str = "SELECT j.jewelryID FROM jewelry as j WHERE j.status=0 or j.status=1"+thisWord+type+condition+color+sort;
 ResultSet result = stmt.executeQuery(str);
 while(result.next()){
 int jewelry_ID=result.getInt("j.jewelryID");
-String str1 ="SELECT j.jewelryID, j.name, iob.closingDate FROM jewelry as j join infoOfBid as iob on j.jewelryID = iob.jewelryID WHERE j.jewelryID =" + jewelry_ID;
+String str1 ="SELECT j.jewelryID, j.status, j.name, iob.closingDate FROM jewelry as j join infoOfBid as iob on j.jewelryID = iob.jewelryID WHERE j.jewelryID =" + jewelry_ID;
 Statement stmt1 = con.createStatement();
 ResultSet result1 = stmt1.executeQuery(str1);
 while(result1.next()){
 int id= result1.getInt("j.jewelryID");
 String nameOfJewelry = result1.getString("j.name");
+int status = result1.getInt("j.status");
 String closingDate = result1.getString("iob.closingDate");
 String currentCost = "jewelry item has no bids";
 String str2 = "SELECT cb.cost FROM CurrentBid as cb join jewelry as j on cb.jewelryID = j.jewelryID WHERE j.jewelryID = " + id;
@@ -78,9 +79,18 @@ ResultSet result2 = stmt2.executeQuery(str2);
 if(result2.next()){
 currentCost = result2.getString("cb.cost");
 }
+if(status==0){
 out.print("<tr><th><a href='jewelryPage.jsp?id=" + id + "'>"+ nameOfJewelry+ "</a></th>");
 out.print("<th>" + currentCost +"</th>");
 out.print("<th>"+ closingDate + "</th></tr>");
+}
+else{
+currentCost = "This item's auction ended";
+out.print("<tr><th>"+ nameOfJewelry+ "</a></th>");
+out.print("<th>" + currentCost +"</th>");
+out.print("<th>"+ closingDate + "</th></tr>");
+	
+}
 }
 }
 con.close();

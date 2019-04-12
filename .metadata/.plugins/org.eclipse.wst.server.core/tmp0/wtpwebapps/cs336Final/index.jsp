@@ -10,6 +10,9 @@ pageEncoding="ISO-8859-1"%>
 <link rel="stylesheet" type="text/css" href="css/index.css"/>
 </head>
 <body>
+
+<h1>WELCOME TO BUYME</h1>
+
 <div id="box">
 		
 <form method="post" action="loginPage.jsp">

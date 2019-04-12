@@ -12,7 +12,7 @@ pageEncoding="ISO-8859-1" import="com.cs336.pkg.*"%>
 <body>
 <%
 String jewelryID_Param = request.getParameter("id");
-out.print(jewelryID_Param);
+out.print("Jewelry ID is "+jewelryID_Param);
 try {
 ApplicationDB db = new ApplicationDB();	
 Connection con = db.getConnection();
