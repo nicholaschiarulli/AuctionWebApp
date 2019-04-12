@@ -13,8 +13,6 @@ pageEncoding="ISO-8859-1" import="com.cs336.pkg.*"%>
 <body>
 <h1>Welcome <%out.print(session.getAttribute("name")); %></h1>
 <p><a href='searchItems.jsp'>Click this link to search for jewelry</a></p>
-<p><a href='buyerHistory.jsp'>Click this link to see your history of bidding</a></p>
-<p><a href='sellerDash.jsp'>Click this link for the seller dashboard</a></p>
 <p><a href='logout.jsp'>Log out</a></p>
 <b>Your current alerts</b>
 <table border='4'>

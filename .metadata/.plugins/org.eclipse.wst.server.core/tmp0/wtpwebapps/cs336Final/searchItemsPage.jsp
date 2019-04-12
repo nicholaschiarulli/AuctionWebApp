@@ -15,6 +15,7 @@ pageEncoding="ISO-8859-1" import="com.cs336.pkg.*"%>
 <table border="4">
 <tr>
 <th>Click the item name</th>
+<th>Status of Auction</th>
 <th>Current Bid</th>
 <th>Closing date</th>
 </tr>
@@ -81,12 +82,13 @@ currentCost = result2.getString("cb.cost");
 }
 if(status==0){
 out.print("<tr><th><a href='jewelryPage.jsp?id=" + id + "'>"+ nameOfJewelry+ "</a></th>");
+out.print("<th>OPEN</th>");
 out.print("<th>" + currentCost +"</th>");
 out.print("<th>"+ closingDate + "</th></tr>");
 }
 else{
-currentCost = "This item's auction ended";
-out.print("<tr><th>"+ nameOfJewelry+ "</a></th>");
+out.print("<tr><th><a href='jewelryPage.jsp?id=" + id + "'>"+ nameOfJewelry+ "</a></th>");
+out.print("<th>CLOSED</th>");
 out.print("<th>" + currentCost +"</th>");
 out.print("<th>"+ closingDate + "</th></tr>");
 	

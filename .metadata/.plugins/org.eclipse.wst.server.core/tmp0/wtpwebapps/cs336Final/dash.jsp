@@ -13,6 +13,8 @@ pageEncoding="ISO-8859-1" import="com.cs336.pkg.*"%>
 <body>
 <h1>Welcome <%out.print(session.getAttribute("name")); %></h1>
 <p><a href='searchItems.jsp'>Click this link to search for jewelry</a></p>
+<p><a href='buyerHistory.jsp'>Click this link to see your history of bidding</a></p>
+<p><a href='sellerDash.jsp'>Click this link for the seller dashboard</a></p>
 <p><a href='logout.jsp'>Log out</a></p>
 <b>Your current alerts</b>
 <table border='4'>
@@ -48,7 +50,7 @@ con.close();
 </table>
 <br>
 <br>
-<b>Email</b>
+<b>YOUR EMAILS</b>
 <table border='4'>
 <tr>
 <td>From</td>
@@ -75,11 +77,14 @@ out.print("<th>"+date_time+"</th></tr>");
 %>
 </table>
 <br>
-<a href='email.jsp'>Send an email to a customer representative</a>
+<a href='email.jsp'>Send an email to a customer representative or another user!</a>
+<p><a href='forum.jsp'>Click this link to view questions asked</a></p>
+<p><a href='q.jsp'>Click this link to ask a question</a></p>
+<p><a href='removeBid.jsp'>Click this link to request to remove a bid</a></p>
 <br>
 <br>
 <br>
-<b>Auction Information Table</b>
+<b>EMAILS FROM BUYME</b>
 <table border='4'>
 <tr>
 <td>Type Of notification</td>
@@ -107,13 +112,9 @@ out.print("<th>"+time+"</th></tr>");
 </table>
 
 <br>
-<br>
-<br>
-<br>
+
 <p><a href='buyerHistory.jsp'>Click this link to see your history of bidding</a></p>
 <p><a href='sellerDash.jsp'>Click this link for the seller dashboard</a></p>
-<p><a href='q.jsp'>Click this link to ask a question</a></p>
-<p><a href='removeBid.jsp'>Click this link to request to remove a bid</a></p>
 <p><a href='logout.jsp'>Log out</a></p>
 </body>
 </html>
