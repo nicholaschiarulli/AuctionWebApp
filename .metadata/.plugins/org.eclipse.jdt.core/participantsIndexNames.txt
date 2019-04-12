@@ -1,0 +1,5 @@
+INDEX VERSION 1.131
+/home/nick/Repos/AuctionWebApp/.metadata/.plugins/org.eclipse.jst.jsp.core/jspsearch/2199867142.index
+/cs336Final/src
+/home/nick/eclipse-workspace/.metadata/.plugins/org.eclipse.jst.jsp.core/jspsearch/2199867142.index
+/cs336Final/src

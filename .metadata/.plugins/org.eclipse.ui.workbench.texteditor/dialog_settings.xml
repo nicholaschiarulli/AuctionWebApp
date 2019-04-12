@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
+		<item value="false" key="isRegEx"/>
+		<item value="result2" key="selection"/>
+		<item value="false" key="casesensitive"/>
+		<item value="false" key="incremental"/>
+		<item value="true" key="wrap"/>
+		<item value="false" key="wholeword"/>
+		<list key="findhistory">
+			<item value="rst"/>
+			<item value="result2"/>
+			<item value="rst2"/>
+			<item value="pwd"/>
+			<item value="eml"/>
+			<item value="pss"/>
+			<item value="PostDate"/>
+			<item value="emalOfSeller"/>
+			<item value="insert1"/>
+			<item value="inip"/>
+			<item value="connectorsize"/>
+			<item value="cond"/>
+			<item value="name"/>
+			<item value="semail"/>
+		</list>
+		<list key="replacehistory">
+			<item value="result2"/>
+			<item value="result1"/>
+			<item value="newPasswordParam"/>
+			<item value="emailParam"/>
+			<item value="ps1"/>
+			<item value="datePosted"/>
+			<item value="emailOfSeller"/>
+			<item value="insert"/>
+			<item value="startingPrice"/>
+			<item value="size"/>
+			<item value="condition"/>
+			<item value="jName"/>
+			<item value="emalOfSeller"/>
+		</list>
+	</section>
+	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">
+		<item value="348" key="DIALOG_WIDTH"/>
+		<item value="1|Ubuntu|11.0|0|GTK|1|" key="DIALOG_FONT_NAME"/>
+		<item value="437" key="DIALOG_HEIGHT"/>
+		<item value="309" key="DIALOG_X_ORIGIN"/>
+		<item value="236" key="DIALOG_Y_ORIGIN"/>
+	</section>
+</section>
