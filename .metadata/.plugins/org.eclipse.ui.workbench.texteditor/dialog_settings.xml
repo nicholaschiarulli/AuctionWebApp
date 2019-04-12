@@ -2,12 +2,15 @@
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="false" key="isRegEx"/>
-		<item value="newPasswordParam" key="selection"/>
+		<item value="result2" key="selection"/>
 		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="true" key="wrap"/>
 		<item value="false" key="wholeword"/>
 		<list key="findhistory">
+			<item value="rst"/>
+			<item value="result2"/>
+			<item value="rst2"/>
 			<item value="pwd"/>
 			<item value="eml"/>
 			<item value="pss"/>
@@ -21,6 +24,8 @@
 			<item value="semail"/>
 		</list>
 		<list key="replacehistory">
+			<item value="result2"/>
+			<item value="result1"/>
 			<item value="newPasswordParam"/>
 			<item value="emailParam"/>
 			<item value="ps1"/>
