@@ -17,7 +17,7 @@ if(passwordParam.isEmpty() || emailParam.isEmpty()) {
 out.println("Your password or email field was empty. Please fill both of them in.");
 } 
 else {
-try { 
+try {
 		
 ApplicationDB db = new ApplicationDB();	
 Connection con = db.getConnection();
@@ -41,9 +41,9 @@ out.println("Password does not match Database");
 out.println("No data avaliable for that user");
 			
 }
-} catch (Exception ex) {
-out.println(ex);
-out.println("error");
+} catch (Exception x) {
+out.println(x);
+out.println("I am sorry but we did not find your account.");
 }
 }	
 %>

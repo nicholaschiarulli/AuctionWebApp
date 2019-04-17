@@ -17,14 +17,13 @@ ApplicationDB db = new ApplicationDB();
 Connection con = db.getConnection();
 Statement stmt = con.createStatement();
 String email_username = ""+session.getAttribute("username"); //"jack@gmail.com";
-out.println(email_username);
 String str = "SELECT email FROM Seller WHERE email=" + "'"+email_username+"';" ;
 ResultSet result = stmt.executeQuery(str);
 if(result.next()){
 String email = result.getString("email");
 con.close();
 if(email.equals(email_username)){
-out.println("<h2>Welcome Seller! Sell some items please!</h2>");
+out.println("<h2>Welcome "+email_username+"! Sell some items please!</h2>");
 out.println("<br>");
 out.println("<br>");
 out.println("<b>Items you have put up for auction</b>");
@@ -50,7 +49,7 @@ if(result2.next()){
 currentCost = result2.getString("cb.cost");
 } 
 out.print("<tr><th><a href='jewelryPage.jsp?id=" + id + "'>" +name + "</a></th>");
-out.print("<th> $"+ currentCost + "</th>");
+out.print("<th> $  "+ currentCost + "</th>");
 out.print("<th>"+ closingDate + "</th></tr>");
 }
 out.print("</table>");
@@ -58,7 +57,7 @@ con.close();
 %>
 <br>
 <br>
-<b>EMAIL FROM BUYME</b>
+<b>EMAILS FROM BUYME</b>
 <br>
 <br>
 <table border='4'>
@@ -109,6 +108,8 @@ out.println("error");
 
 <p><a href='dash.jsp'>Click this link for the basic dashboard</a></p>
 <p><a href='sellerHistory.jsp'>Click to see your seller history</a></p>
+<p><a href='question.jsp'>Click this link to ask a question</a></p>
+<p><a href='forum.jsp'>Click this link to view questions asked</a></p>
 <p><a href='logout.jsp'>Log out</a></p>
 </body>
 </html>

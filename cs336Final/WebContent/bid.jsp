@@ -13,10 +13,10 @@ pageEncoding="ISO-8859-1" import="com.cs336.pkg.*"%>
 <%
 int jewelryID = Integer.parseInt(request.getParameter("id"));
 %>
-<form method="post" action="bidPage.jsp?id=<%=jewelryID %>">
+<form method="post" action="bidPage.jsp?id=<%=jewelryID%>">
 <table>	
 <tr>
-<td>Bid amount</td><td><input type="number" name="bidAmount"></td>
+<td>Bid amount</td><td><input type="number" name="bidAmount" min="0"></td>
 </tr>
 				
 </table>

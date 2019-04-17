@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1" import="com.cs336.pkg.*"%>
+pageEncoding="ISO-8859-1" import="com.cs336.pkg.*"%>
 <%@ page import="java.io.*,java.util.*,java.sql.*"%>
 <%@ page import="javax.servlet.http.*,javax.servlet.*"%>
 
@@ -11,7 +11,8 @@
 <title>Admin</title>
 </head>
 <body>
-<p>Create an account for a customer representative</p>
+<b>Create an account for a customer representative</b>
+<br>
 <br>
 <form method="post" action="createCustomerRep.jsp">
 <table>
@@ -40,7 +41,7 @@
 <form method="get" action="salesHistory.jsp" name="salesReport">
 <table>
 <tr>
-	<td>Report:</td>
+	<td>Get Sales Report:</td>
 	<td>
 	<select name="sales">
 	<option></option>

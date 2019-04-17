@@ -97,16 +97,23 @@ con.close();
 out.println("<p><a href='alert.jsp?id="+jewelryID+"'>Click this link to put an alert on this item</a></p>");
 if (status == 0){
 out.println("<p><a href='ifOnlySeller.jsp?id="+jewelryID+"'>Click this link to place a bid</a></p>");
+out.println("<p><a href='auto.jsp?id="+jewelryID+"'>Click this link to put an AUTO bid on this item</a></p>");
 out.println("<p><a href='historyBid.jsp?id="+jewelryID+"'>Click this link to see the bid history</a></p>");
 out.println("<p><a href='sellerHistory.jsp?id="+emailOfSeller+"'>Click this link to see "+emailOfSeller+"'s history</a></p>");
-out.println("<p><a href='similar.jsp?id="+jewelryID+"&type="+type+"'>Click this link to see similar items</a></p>");
+out.println("<p><a href='similar.jsp?id="+jewelryID+"&type="+type+"&color="+color+"'>Click this link to see similar items</a></p>");
 out.println("<p><a href='searchItems.jsp'>Back to searching jewelry</a></p>");
 out.println("<p><a href='dash.jsp'>Buyer Dashboard</a></p>");
+out.println("<p><a href='sellerDash.jsp'>Seller Dashboard</a></p>");
+
 }
 else{
 	out.println("<h2>THIS ITEM'S AUCTION ENDED</h2>");
 	out.println("<p><a href='dash.jsp'>Buyer/basic Dashboard</a></p>");
 	out.println("<p><a href='sellerDash.jsp'>Seller Dashboard</a></p>");
+	out.println("<p><a href='sellerHistory.jsp?id="+emailOfSeller+"'>Click this link to see "+emailOfSeller+"'s history</a></p>");
+	out.println("<p><a href='historyBid.jsp?id="+jewelryID+"'>Click this link to see the bid history</a></p>");
+	out.println("<p><a href='similar.jsp?id="+jewelryID+"&type="+type+"&color="+color+"'>Click this link to see similar items</a></p>");
+	out.println("<p><a href='searchItems.jsp'>Back to searching jewelry</a></p>");
 
 	
 }

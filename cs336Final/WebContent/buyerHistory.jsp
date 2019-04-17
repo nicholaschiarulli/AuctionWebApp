@@ -33,18 +33,18 @@ String str = "SELECT b.BidID, b.jewelryID, j.name FROM Bid as b, jewelry as j WH
 ResultSet result = stmt.executeQuery(str);
 
 if(result != null){
-	while(result.next()){
+while(result.next()){
 		
-		String bID= result.getString("b.BidID");
-		
-		String jID = result.getString("b.jewelryID");
-		
-		String jName = result.getString("j.name");
-	
-	out.print("<th> "+ bID + "</th>");
+String bID= result.getString("b.BidID");
 
-	out.print("<th> "+ jID + "</th>");
-	out.print("<th>"+ jName + "</th></tr>");
+String jID = result.getString("b.jewelryID");
+
+String jName = result.getString("j.name");
+	
+out.print("<th> "+ bID + "</th>");
+
+out.print("<th> "+ jID + "</th>");
+out.print("<th>"+ jName + "</th></tr>");
 }
 			
 con.close();
@@ -53,9 +53,9 @@ con.close();
 }
 
 
-catch (Exception ex) {
-out.println(ex);
-out.println("error");
+catch (Exception x) {
+out.println("The buyer's history who you are attempting to view has deleted his account. His information is no longer viewable to other customers.");
+
 }
 %>
 </table>

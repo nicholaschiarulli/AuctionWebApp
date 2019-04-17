@@ -28,9 +28,15 @@ String n = null;
 /* out.println(startingPrice);
 out.println(increment);
 out.println(secretMinPrice); */
-if(name.isEmpty()||condition.isEmpty() || type.isEmpty()||startingPrice.isEmpty()||closingdate.isEmpty()||increment.isEmpty()||secretMinPrice.isEmpty()||Integer.parseInt(secretMinPrice) < Integer.parseInt(increment)|| datePosted.after(Timestamp.valueOf(closingdate.replace("T", " ")+":00"))){
-	out.print("<h1>You did not fill in all the fields or your Secret Minimum Price was less than your increment field. Please go back and try again.</h1>");
-}else{
+if(name.isEmpty()||condition.isEmpty() || type.isEmpty()||startingPrice.isEmpty()||closingdate.isEmpty()||increment.isEmpty()||secretMinPrice.isEmpty()||Integer.parseInt(secretMinPrice) < Integer.parseInt(increment)){
+out.print("<h1>You did not fill in all the fields or your Secret Minimum Price was less than your increment field. Please go back and try again.</h1>");
+}
+else if(datePosted.after(Timestamp.valueOf(closingdate.replace("T", " ")+":00"))){
+out.print("<h1>You can not post an item's closing date/time before the current date/time. Please go back and retry.</h1>");
+
+	
+}
+else{
 	
 try {
 ApplicationDB db = new ApplicationDB();	
@@ -81,7 +87,7 @@ ps1.executeUpdate();
 con.close();
 out.print("<p>Your jewelry will now appear in searches.</p>");
 } catch (Exception x) {
-out.print("Error" + x);
+out.print("Something went wrong. Please go back and try to post your item with different information.");
 }
 }
 %>

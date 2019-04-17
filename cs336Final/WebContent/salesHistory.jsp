@@ -13,7 +13,8 @@ pageEncoding="ISO-8859-1" import="com.cs336.pkg.*"%>
 <h1 align="left">Sales History</h1>
 	<%double earnings = 0.0; %>
 <form method ="post">
-<%try {
+<%
+try {
 	
 	ApplicationDB db = new ApplicationDB();	
 	Connection con = db.getConnection();
@@ -26,7 +27,7 @@ pageEncoding="ISO-8859-1" import="com.cs336.pkg.*"%>
 		ResultSet result = stmt.executeQuery(q);
 		if(result.next()){%>
 			<h3>Total Earnings</h3>
-			<table align="center" border="3">
+			<table align="center" border="4">
 			<tr>
 				<th>Total Earnings</th>
 			</tr><%
@@ -51,7 +52,7 @@ pageEncoding="ISO-8859-1" import="com.cs336.pkg.*"%>
 		ResultSet result = stmt.executeQuery(q);
 		if(result.next()){%>
 			<h3>Earnings Per Jewelry</h3>
-			<table border ="3" align = "center">
+			<table border ="4" align = "center">
 		<tr>
 			<th>JID</th>
 			
@@ -85,7 +86,7 @@ pageEncoding="ISO-8859-1" import="com.cs336.pkg.*"%>
 		ResultSet result = stmt.executeQuery(q);
 		if(result.next()){%>
 			<h3>Earnings Per Types of Jewelry</h3>
-			<table align="center" border="3">
+			<table align="center" border="4">
 			<tr>
 				<th>Jewelry Type</th>
 				<th>Earnings</th>
@@ -112,7 +113,7 @@ pageEncoding="ISO-8859-1" import="com.cs336.pkg.*"%>
 		ResultSet result = stmt.executeQuery(q);
 		if(result.next()){%>
 			<h3>Earnings Per Seller</h3>
-			<table align="center" border="3">
+			<table align="center" border="4">
 			<tr>
 				<th>Seller</th>
 				<th>Earnings</th>
@@ -139,7 +140,7 @@ pageEncoding="ISO-8859-1" import="com.cs336.pkg.*"%>
 		ResultSet result = stmt.executeQuery(q);
 		if(result.next()){%>
 		<h3>Best Selling Jewelry</h3>
-		<table border ="3" align = "center">
+		<table border ="4" align = "center">
 		<tr>
 			<th>JID</th>
 			
@@ -170,7 +171,7 @@ pageEncoding="ISO-8859-1" import="com.cs336.pkg.*"%>
 		if(result.next())
 		{%>
 		<h3>Best Buyer</h3>
-		<table border ="3" align = "center";>
+		<table border ="4" align = "center">
 		<tr>
 			<th>Buyer Email</th>
 			

@@ -23,7 +23,7 @@ String passwordParam = request.getParameter("password");
 String passwordConfirmParam = request.getParameter("passwordConfirm");
 String sellerParam = request.getParameter("seller"); 
 if (emailParam.isEmpty() || passwordParam.isEmpty()){
-out.print("<p>Password or email field was empty. Please fill both in.</P>");
+out.print("<h1>Password or email field was empty. Please fill both in.</h1>");
 } 
 else if (passwordParam.equals(passwordConfirmParam)) {
 String insert1 = "INSERT INTO customer values (?, ?, ?, ?);";
@@ -58,16 +58,21 @@ out.print("<p>Customer account has now been created</p>");
 response.sendRedirect("index.jsp");
 } 
 else {
-out.print("<p>Password does not match confirm password field</P>");
+out.print("<h1>Password does not match confirm password field</h1>");
 }	
 			
 con.close();
 			
-} catch (Exception ex) {
+} catch (Exception x) {
+out.print("<h1>You entered an invalid email OR your passwword or email were too many characters. Please try again</h1>");
 }
 %>
-<form method="post" action="index.jsp">
+<form method="post" action="register.jsp">
 <input type="submit" value="Back to register page" class="button">
+</form>
+<br>
+<form method="post" action="index.jsp">
+<input type="submit" value="Back to main page" class="button">
 </form>
 </body>
 </html>

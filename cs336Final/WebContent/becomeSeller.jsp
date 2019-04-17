@@ -20,6 +20,6 @@ PreparedStatement ps1 = con.prepareStatement(insert2);
 ps1.setString(1, email);
 ps1.executeUpdate();
 response.sendRedirect("sellerDash.jsp");
-	%>
+%>
 </body>
 </html>

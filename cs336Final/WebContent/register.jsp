@@ -11,7 +11,6 @@ pageEncoding="ISO-8859-1" import="com.cs336.pkg.*"%>
 <title>Register</title>
 </head>
 <body>
-
 <div id="box">
 <form method="post" action="registerPage.jsp">
 <table>

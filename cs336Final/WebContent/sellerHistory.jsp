@@ -13,29 +13,29 @@ pageEncoding="ISO-8859-1" import="com.cs336.pkg.*"%>
 
 <table border='4'>
 <tr>
-<th>JID</th>
+<th>ID of Jewelry</th>
 <th>Date Posted</th>
 <th>Jewelry Name</th>
 </tr>
 <%
+String email_username = ""+session.getAttribute("username");
 try {
 	ApplicationDB db = new ApplicationDB();	
 	Connection con = db.getConnection();
 	
 	Statement stmt = con.createStatement();
 	
-	String email_username = request.getParameter("id"); //"jack@gmail.com";
-	out.println(email_username);
+	out.println("<h2> Hisory of "+email_username+"</h2>");
 	
-	String str = "SELECT p.JID,p.datePosted, j.name FROM Post as p, jewelry as j WHERE seller_email=" + "'"+email_username+"' and p.JID = j.jewelryID;" ;
+	String str = "SELECT j.jewelryID,j.datePosted, j.name FROM jewelry as j WHERE emailOfSeller=" + "'"+email_username+"';" ;
 	
 	ResultSet result = stmt.executeQuery(str);
 	
 	if(result != null){
 		while(result.next()){
-			String jID = result.getString("p.JID");
+			String jID = result.getString("j.jewelryID");
 			
-			String DatePosted= result.getString("p.datePosted");
+			String DatePosted= result.getString("j.datePosted");
 			
 			String jName = result.getString("j.name");
 		
@@ -52,12 +52,13 @@ try {
 }
 
 
-catch (Exception ex) {
-out.println(ex);
-out.println("error");
+catch (Exception x) {
+out.println(x);
+out.println("Seller no longer exists in database");
 }
 %>
 </table>
+<p><a href='sellerDash.jsp'>Click this link for the seller dashboard</a></p>
 <p><a href='dash.jsp'>Click this link for the basic dashboard</a></p>
 <p><a href='logout.jsp'>Log out</a></p>
 

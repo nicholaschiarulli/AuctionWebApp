@@ -92,7 +92,7 @@ pageEncoding="ISO-8859-1" import="com.cs336.pkg.*"%>
 </tr>
 </table>
 <br>
-<input type="submit" value="Search" class="button">
+<input type="submit" value="Search for Jewelry" class="button">
 
 
 

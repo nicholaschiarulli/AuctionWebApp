@@ -79,7 +79,7 @@ out.print("<th>"+date_time+"</th></tr>");
 <br>
 <a href='email.jsp'>Send an email to a customer representative or another user!</a>
 <p><a href='forum.jsp'>Click this link to view questions asked</a></p>
-<p><a href='q.jsp'>Click this link to ask a question</a></p>
+<p><a href='question.jsp'>Click this link to ask a question</a></p>
 <p><a href='removeBid.jsp'>Click this link to request to remove a bid</a></p>
 <br>
 <br>

@@ -18,10 +18,10 @@ Connection con = DB.getConnection();
 String str = "DELETE FROM jewelry WHERE jewelryID = "+jewelryID+";";
 PreparedStatement ps = con.prepareStatement(str);
 ps.executeUpdate();
-out.println("Successful");
+out.print("Successfully removed this auction. No one can bid on it anymore!");
 } 
 catch (Exception x){
-out.println(x);
+out.print("Something prevented you from deleting this auction. Please try again.");
 }
 %>
 <a href='customerRepresentativePage.jsp'>Back to Customer Representative Page</a>

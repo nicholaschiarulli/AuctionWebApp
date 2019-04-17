@@ -14,11 +14,10 @@ pageEncoding="ISO-8859-1" import="com.cs336.pkg.*"%>
 String passwordParam = request.getParameter("password");
 String emailParam = request.getParameter("email");
 if(passwordParam.isEmpty() || emailParam.isEmpty()) {
-out.println("Password or email field was empty. Please fill both in.");
+out.println("<h1>Password or email field was empty. Please fill both in.</h1>");
 } 
 else {
-try { 
-		
+try { 	
 ApplicationDB db = new ApplicationDB();	
 Connection con = db.getConnection();
 Statement stmt = con.createStatement();
@@ -27,10 +26,7 @@ ResultSet result = stmt.executeQuery(str);
 if(result.next()){
 String password = result.getString("password");
 String firstName = result.getString("firstName");
-//int isSeller = result.getInt("isSeller");
-					
-					
-			
+//int isSeller = result.getInt("isSeller");		
 con.close();
 if(password.equals(passwordParam)){
 session.setAttribute("username", emailParam);
@@ -54,11 +50,11 @@ out.println("Password does not match confirm password field");
 }
 } 
 else {
-out.println("No data found");
+out.println("Your email was enterred incorrectly or this username does not exist in BUYME.");
 					
 }
-} catch (Exception ex) {
-out.println(ex);
+} catch (Exception x) {
+out.println(x);
 out.println("error");
 }
 }

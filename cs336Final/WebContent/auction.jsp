@@ -11,6 +11,7 @@ pageEncoding="ISO-8859-1" import="com.cs336.pkg.*"%>
 </head>
 <body>
 <h1>Post an Item!</h1>
+
 <form method="post" action="auctionPost.jsp">
 <table border="4">
 
@@ -28,7 +29,7 @@ pageEncoding="ISO-8859-1" import="com.cs336.pkg.*"%>
 </tr>
 
 <tr>
-<td>Minimum price</td><td><input type="number" name="secretMinPrice" min="0"></td>
+<td>Secret Minimum price</td><td><input type="number" name="secretMinPrice" min="0"></td>
 </tr>
 
 <tr>
@@ -93,6 +94,7 @@ pageEncoding="ISO-8859-1" import="com.cs336.pkg.*"%>
 <br>
 <input class="button" type="submit" value="Post item to the auction page!">
 </form>
+<p><a href='sellerDash.jsp'>Click this link to go back to the seller dashboard</a></p>
 
 <p><a href='logout.jsp'>Log out</a></p>
 </body>

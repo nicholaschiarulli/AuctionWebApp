@@ -43,5 +43,7 @@ out.println("<p><a href='becomeBuyer.jsp?id="+jewelryID+"'>Become a buyer as wel
 }		
 }
 %>
+<p><a href='dash.jsp'>Click this link for the basic dashboard</a></p>
+
 </body>
 </html>

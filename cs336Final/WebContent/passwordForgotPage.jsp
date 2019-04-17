@@ -13,7 +13,7 @@ pageEncoding="ISO-8859-1" import="com.cs336.pkg.*"%>
 <%
 String emailParam = request.getParameter("email");
 String newPasswordParam = request.getParameter("password");
-Timestamp currentTime = new Timestamp(System.currentTimeMillis());
+Timestamp duration = new Timestamp(System.currentTimeMillis());
 try{
 ApplicationDB DB = new ApplicationDB();	
 Connection con = DB.getConnection();
@@ -21,14 +21,14 @@ String str = "insert into Email values (?, ?, ?, ?,?);";
 PreparedStatement ps = con.prepareStatement(str);
 ps.setString(1, emailParam);
 ps.setString(2, "CR");
-ps.setTimestamp(3, currentTime);
+ps.setTimestamp(3, duration);
 ps.setString(4,"ResetMyPassword");
 ps.setString(5,"Please set my new password to: "+newPasswordParam);
 ps.executeUpdate();
-out.println("Succesful");
+out.println("Succesfully sent a reset password request to a customer representative. When a customer representative logs in they will see your request and change it if they believe it is appropriate.");
 con.close();
 } catch (Exception x) {
-out.println(x);
+out.println("could not submit request email does not exist in our database. You may have entered your information wrong.");
 }
 %>
 <a href='index.jsp'>Back to login page</a>

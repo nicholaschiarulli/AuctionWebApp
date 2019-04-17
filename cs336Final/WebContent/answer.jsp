@@ -7,23 +7,22 @@ pageEncoding="ISO-8859-1" import="com.cs336.pkg.*"%>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <link rel="stylesheet" type="text/css" href="css/index.css"/>
-<title>Forgot Password Page</title>
+<title>answer</title>
 </head>
 <body>
-<div>
-<h1>Keep your password under 45 characters</h1>
-<form method="post" action="passwordForgotPage.jsp">
-<table>
-<tr>    
-<td>Email: </td><td><input type="text" name="email"></td>
-</tr>
+<%int idforum = Integer.parseInt(request.getParameter("idforum")); %>
+<form method="post" action="answerPage.jsp?idforum=<%=idforum %>">
+<table border="4">
 <tr>
-<td>Enter New Password: </td><td><input type="password" name="password"></td>
+<td> <font size="+3">Answer to Question:</font></td><td><textarea name="answer" rows ="10" > </textarea></td>
 </tr>
+
 </table>
+
 <br>
 <input type="submit" value="submit" class="button">
 </form>
-</div>
 </body>
 </html>
+
+

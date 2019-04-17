@@ -12,21 +12,20 @@ pageEncoding="ISO-8859-1" import="com.cs336.pkg.*"%>
 <body>
 <%
 String jewelryID_Param = request.getParameter("id");
-out.print("Jewelry ID is "+jewelryID_Param);
+out.print("The Jewelry ID that you set an alert on is "+jewelryID_Param);
 try {
 ApplicationDB db = new ApplicationDB();	
 Connection con = db.getConnection();
 Statement stmt = con.createStatement();
-jewelryID_Param = request.getParameter("id");
 String email = ""+session.getAttribute("username");
-String insert = "INSERT INTO alert values (?, ?);";
-PreparedStatement ps = con.prepareStatement(insert);
+String str = "INSERT INTO alert values (?, ?);";
+PreparedStatement ps = con.prepareStatement(str);
 ps.setString(1, email);
 ps.setString(2, jewelryID_Param);
 ps.executeUpdate();
 out.print("<h1>Alerted. All of your alerts will appear on the basic DashBoard.</h1>");
 con.close();
-} catch (Exception ex) {
+} catch (Exception x) {
 out.print("<h1>You have already placed an alert on this item</h1>");
 }
 %>

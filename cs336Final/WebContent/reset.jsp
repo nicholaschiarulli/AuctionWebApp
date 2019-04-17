@@ -19,9 +19,9 @@ Connection con = DB.getConnection();
 String str = "UPDATE customer SET password='"+newPasswordParam+"' where email = '"+emailParam+"';";
 PreparedStatement ps = con.prepareStatement(str);
 ps.executeUpdate();
-out.println("Successful");
+out.println("Successfully reset the customer's password");
 } catch (Exception x){
-out.println("User not found");
+out.println("The password was too many characters. You cannot reset it to the requested new password");
 }
 %>
 <a href='customerRepresentativePage.jsp'>Back to Customer Representative Page</a>
