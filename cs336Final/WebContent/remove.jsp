@@ -11,6 +11,10 @@ pageEncoding="ISO-8859-1" import="com.cs336.pkg.*"%>
 </head>
 <body>
 <%
+
+//Find next highest value in cost column for bid for jewelryId. 
+///set that value to the new currentBid on that jewelryID
+//Then remove the bid using the bidID to complete the process
 try{
 String emailParam = request.getParameter("email");
 int jewelryID = Integer.parseInt(request.getParameter("jewelryID"));
