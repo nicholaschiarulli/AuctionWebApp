@@ -29,7 +29,7 @@ ps.executeUpdate();
 con.close();
 } catch (SQLException ex) {
 //out.println(ex);
-if(ex.getSQLState().equals("45000")){//set to 10000
+if(ex.getSQLState().equals("20000")){
 try{
 //out.println("hello");
 ApplicationDB db = new ApplicationDB();	
@@ -45,7 +45,7 @@ out.println("<p>You can go back to the previous item and read the increment and 
 out.println(x);				
 }
 } 
-else if (ex.getSQLState().equals("40000")){//set to 20000
+else if (ex.getSQLState().equals("10000")){
 	out.println("<p>Your bid must be at least whatever the seller's increment number was plus the starting price of the item!</p>");
 out.println("<p>You can go back to the previous item and read the increment and starting price</p>");
 }
