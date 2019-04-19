@@ -10,8 +10,16 @@ pageEncoding="ISO-8859-1" import="com.cs336.pkg.*"%>
 <title>Insert title here</title>
 </head>
 <body>
-<h1>Welcome <%out.print(session.getAttribute("username")); %></h1>
-<b>FORUM PAGE FOR QUESTIONS!</b>
+
+<ul>
+<li><a href='dash.jsp'>Buyer Dashboard</a></li>
+<li><a href='sellerDash.jsp'>Seller Dashboard</a></li>
+  <li><a href='searchItems.jsp'>Search for Jewelry</a></li>
+    <li>  <a href='question.jsp'>Ask a Question</a></li>
+   <li> <a href='email.jsp'>Send an Email</a></li>
+  <li><a href='logout.jsp'>Log out</a></li>
+</ul>
+<h1>Welcome to the Forum <%out.print(session.getAttribute("name")); %></h1>
 <br>
 <br>
 <table border='4'>
@@ -59,8 +67,6 @@ con.close();
 </table>
 <br>
 <br>
-<a href=dash.jsp>Back to basic/buyer dashboard</a>
-<a href=sellerDash.jsp>Back to seller dashboard</a>
 <p><a href='logout.jsp'>Log out</a></p>
 
 </body>

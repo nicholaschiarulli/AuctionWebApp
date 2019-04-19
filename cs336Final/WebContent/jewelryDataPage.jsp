@@ -61,23 +61,8 @@ con.close();
 %>
 
 <ul>
-  <li><a href='dash.jsp'>Buyer/basic Dashboard</a></li>
-  <li><a href='sellerDash.jsp'>Seller Dashboard</a></li>
-<li><a href='alert.jsp?id="+jewelryID+"'>Place an Alert on this Item</a></li>
-  <li><a href='searchItems.jsp'>Search for Jewelry</a></li>
-  
-   
-    
-  <li class="dropdown">
-    <a href="javascript:void(0)" class="dropbtn">Menu</a>
-    <div class="dropdown-content">
-      <a href='buyerHistory.jsp'>View Your History of Bidding</a>
-      <a href='sellerHistory.jsp?id=<%=emailOfSeller%>'>This Seller's History</a>
-     <a href='removeBid.jsp'>Request to remove a bid</a>
-     <a href='similar.jsp?id=<%=jewelryID%>&type=<%=type%>&color=<%=color%>'>Similar Items</a>
-     <a href='historyBid.jsp?id=<%=jewelryID%>'>History for this Auction</a>
-    </div>
-  </li>
+<li><a href='customerRepresentativePage.jsp'>Back to Customer Representative Page</a></li>
+
 
   
   
@@ -123,20 +108,16 @@ con.close();
 	
 <%
 if (status == 0){
-out.println("<p><a href='ifOnlySeller.jsp?id="+jewelryID+"'>Place a Bid on this Item</a></p>");
-out.println("<p><a href='auto.jsp?id="+jewelryID+"'>Place an AUTO bid on this Item</a></p>");
-out.println("<p><a href='dash.jsp'>Buyer Dashboard</a></p>");
-out.println("<p><a href='sellerDash.jsp'>Seller Dashboard</a></p>");
 
 }
 else{
 	out.println("<h2>THIS ITEM'S AUCTION ENDED</h2>");
-	out.println("<p><a href='dash.jsp'>Buyer/basic Dashboard</a></p>");
-	out.println("<p><a href='sellerDash.jsp'>Seller Dashboard</a></p>");
 
 	
 }
 %>
+<p><a href='customerRepresentativePage.jsp'>Back to Customer Representative Page</a></p>
+
 <p><a href='logout.jsp'>Log out</a></p>
 </body>
 </html>

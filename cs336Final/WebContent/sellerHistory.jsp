@@ -18,7 +18,13 @@ pageEncoding="ISO-8859-1" import="com.cs336.pkg.*"%>
 <th>Jewelry Name</th>
 </tr>
 <%
-String email_username = ""+session.getAttribute("username");
+
+String email_username = request.getParameter("id");
+if(email_username==null){
+	 email_username = ""+session.getAttribute("username"); //"jack@gmail.com";
+
+	
+}
 try {
 	ApplicationDB db = new ApplicationDB();	
 	Connection con = db.getConnection();

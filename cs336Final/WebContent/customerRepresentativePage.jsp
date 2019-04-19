@@ -11,29 +11,45 @@ pageEncoding="ISO-8859-1" import="com.cs336.pkg.*"%>
 <title>CR Page</title>
 </head>
 <body>
-
+<ul>
+  <li> <a href='jewelryData.jsp'>View Jewelry and IDs</a></li>
+    <li><a href='CRforum.jsp'>Answer Questions on the Forum</a></li>
+   <li> <a href='email.jsp'>Send an Email</a></li>
+  <li><a href='logout.jsp'>Log out</a></li>
+</ul>
 <%
 String email_username = ""+session.getAttribute("username");
-out.println("Hello Customer Representative  " + email_username);
+out.println("<h1>Hello Customer Representative  " + email_username+"</h1>");
 %>
 <br>
 <br>
+<h3>EMAILS SENT TO YOU</h3>
 
 <table border="4">
-<tr><td>Things to do</td></tr>
+<tr>
+<td>From</td>
+<td>Subject</td>
+<td>Content</td>
+<td>Time Sent</td>
+</tr>
 <%
 ApplicationDB db = new ApplicationDB();	
 	
 Connection con = db.getConnection();
 Statement state = con.createStatement();
  	
-String str = "select content, fromCol from Email where toCol='CR'";
+String str = "select * from Email where toCol='CR' OR toCol=" + "'"+email_username+"';";
 ResultSet result = state.executeQuery(str);
 while(result.next()){
 			
 String fromCol = result.getString("fromCol");
 String content = result.getString("content");
-out.print("<tr><th>"+content +"   FROM:   "+  fromCol+ "</th></tr>");
+String date_time = result.getString("date_time");
+String theSubject = result.getString("theSubject");
+out.print("<tr><th>" +fromCol + "</th>");
+out.print("<th>" + theSubject +"</th>");
+out.print("<th>"+content + "</th>");
+out.print("<th>"+date_time+"</th></tr>");  
 				
 }
 con.close();
@@ -55,12 +71,13 @@ con.close();
 </tr>
 </table>
 <br>
-<input type="submit" value="submit" class="button">
+<input type="submit" value="Reset Password" class="button">
 </form>
 
 <br>
 <br>
 <b>Remove a Bid</b>
+<b>NOTE: Only remove a bid if it is the current bid of an item</b>
 <form method="post" action="remove.jsp">
 <table border="4">
 <tr>
@@ -73,7 +90,7 @@ con.close();
 </table>
 
 <br>
-<input type="submit" value="submit" class="button">
+<input type="submit" value="Remove Bid" class="button">
 </form>
 
 
@@ -89,11 +106,13 @@ con.close();
 </table>
 
 <br>
-<input type="submit" value="submit" class="button">
+<input type="submit" value="Remove Auction" class="button">
 </form>
 
+<br>
 
-<p><a href=crForum.jsp>Click this link to answer questions on the forum</a></p>
+<br>
+<p><a href=crForum.jsp>Answer Questions on the Forum</a></p>
 <p><a href='logout.jsp'>Log out</a></p>
 </body>
 </html>

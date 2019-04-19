@@ -24,44 +24,9 @@ pageEncoding="ISO-8859-1" import="com.cs336.pkg.*"%>
 ApplicationDB db = new ApplicationDB();	
 Connection con = db.getConnection();
 Statement stmt = con.createStatement();
-String type = request.getParameter("type");
-String sort = request.getParameter("sort");
-String thisWord =request.getParameter("thisWord");
-String condition = request.getParameter("condition");
-String color = request.getParameter("color");
-	
-if(thisWord.isEmpty()){
-	thisWord = "";
-} 
-else {
-	thisWord = " and j.name like '%"+thisWord+"%'";
-}
-if(type.isEmpty()){
-type = "";
-} 
-else {
-type = " and j.type = '"+type+"'";
-}
-if(condition.isEmpty()){
-condition = "";
-} 
-else {
-condition = " and j.condition='" + condition+"'";
-}
-if(color.isEmpty()){
-color = "";
-} 
-else {
-color = " and j.color='"+color+"'"; 
-}
-if(sort.isEmpty()){
-sort="";
-} 
-else {
-sort = " order by "+ sort;
-}
+
 			
-String str = "SELECT j.jewelryID FROM jewelry as j WHERE j.status=0 or j.status=1"+thisWord+type+condition+color+sort;
+String str = "SELECT j.jewelryID FROM jewelry as j";
 ResultSet result = stmt.executeQuery(str);
 while(result.next()){
 int jewelry_ID=result.getInt("j.jewelryID");
@@ -81,13 +46,13 @@ if(result2.next()){
 currentCost = result2.getString("cb.cost");
 }
 if(status==0){
-out.print("<tr><th><a href='jewelryPage.jsp?id=" + id + "'>NAME: "+ nameOfJewelry+ " ID: "+id+" </a></th>");
+out.print("<tr><th><a href='jewelryDataPage.jsp?id=" + id + "'>NAME: "+ nameOfJewelry+ " ID: "+id+" </a></th>");
 out.print("<th>OPEN</th>");
 out.print("<th>" + currentCost +"</th>");
 out.print("<th>"+ closingDate + "</th></tr>");
 }
 else{
-out.print("<tr><th><a href='jewelryPage.jsp?id=" + id + "'>NAME: "+ nameOfJewelry+ " ID: "+id+" </a></th>");
+out.print("<tr><th><a href='jewelryDataPage.jsp?id=" + id + "'>NAME: "+ nameOfJewelry+ " ID: "+id+" </a></th>");
 out.print("<th>CLOSED</th>");
 out.print("<th>" + currentCost +"</th>");
 out.print("<th>"+ closingDate + "</th></tr>");
@@ -98,8 +63,7 @@ out.print("<th>"+ closingDate + "</th></tr>");
 con.close();
 %>
 </table>
-<p><a href='searchItems.jsp'>Back to search</a></p>
-<p><a href='dash.jsp'>Buyer's Dashboard</a></p>
+<p><a href='customerRepresentativePage.jsp'>Back to Customer Representative Page</a></p>
 <p><a href='logout.jsp'>Log out</a></p>
 </body>
 </html>

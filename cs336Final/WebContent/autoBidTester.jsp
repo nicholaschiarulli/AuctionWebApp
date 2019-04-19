@@ -13,7 +13,8 @@
 <%
 int id = Integer.parseInt(request.getParameter("id"));
 int maxVal = Integer.parseInt(request.getParameter("maxVal"));
-
+int cost=0;
+int increment =0;
 //out.println("id = " + id + "\nmaxVal = " + maxVal + "\nemail = " + session.getAttribute("username").toString());
 
 String email = session.getAttribute("username").toString();
@@ -22,19 +23,39 @@ try
 ApplicationDB db = new ApplicationDB();	
 Connection con = db.getConnection();
 Statement stmt = con.createStatement();
-String str = "Insert into Auto values('" + email + "'," + id + ", " + maxVal + ");";
+String str = "select increment from infoOfBid where jewelryID = "+id+";";
+ResultSet result = stmt.executeQuery(str);
+
+if(result.next()){
+	 increment = result.getInt("increment");
+}
+
+ str = "select cost from CurrentBid where jewelryID = "+id+";";
+  result = stmt.executeQuery(str);
+
+ if(result.next()){
+ 	 cost = result.getInt("cost");
+ }
+ str = "Insert into Auto values('" + email + "'," + id + ", " + maxVal + ");";
 PreparedStatement preparedStmt = con.prepareStatement(str);
 preparedStmt.executeUpdate();
 
 con.close();
-
+int total = increment + cost;
+if(total> maxVal){
+	out.println("Your max value set is less than the current bid plus the increment please set one higher than "+total+"");	
+}else{
 out.println("The Auto bid is set up!");
+response.sendRedirect("bidPage.jsp?id=" + request.getParameter("id") + "&bidAmount=" + total+ "");
+}
+
 }
 catch (Exception ex) 
 {
 //out.println(ex);
 out.println("error");
 }
+
 out.println("<p><a href='jewelryPage.jsp?id=" + request.getParameter("id") + "&name=" + request.getParameter("name") + "'>Back</a></p>");
 out.println("<p><a href='dash.jsp'>Buyer Dashboard</a></p>");
 out.println("<p><a href='logout.jsp'>Log out</a></p>");

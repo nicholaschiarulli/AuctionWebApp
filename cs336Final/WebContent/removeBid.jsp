@@ -11,19 +11,24 @@ pageEncoding="ISO-8859-1" import="com.cs336.pkg.*"%>
 </head>
 <body>
 <div>
-<h1>Keep your password under 45 characters</h1>
-<form method="post" action="passwordForgotPage.jsp">
+<h1>This is the Form to Request the Removal of a Bid</h1>
+<h2>NOTE: You should only request a bid removal if you have the current bid of this item</h2>
+
+<form method="post" action="removeBidPage.jsp">
 <table>
 <tr>    
 <td>Your Email: </td><td><input type="text" name="email"></td>
 </tr>
 <tr>
-<td>Enter New Password: </td><td><input type="password" name="password"></td>
+<td>Jewelry ID: </td><td><input type="text" name="jewelryID"></td>
 </tr>
 </table>
 <br>
-<input type="submit" value="Request New Password" class="button">
+<input type="submit" value="Request Removal of Bid" class="button">
 </form>
 </div>
+<br>
+<a href='dash.jsp'>Buyer Dashboard</a>
+
 </body>
 </html>

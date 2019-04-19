@@ -11,15 +11,35 @@ pageEncoding="ISO-8859-1" import="com.cs336.pkg.*"%>
 <title>Dashboard</title>
 </head>
 <body>
+<ul>
+<li><a href='sellerDash.jsp'>Seller Dashboard</a></li>
+  <li><a href='searchItems.jsp'>Search for Jewelry</a></li>
+    <li><a href='forum.jsp'>Browse Questions Asked</a></li>
+   <li> <a href='email.jsp'>Send an Email</a></li>
+  <li class="dropdown">
+    <a href="javascript:void(0)" class="dropbtn">Menu</a>
+    <div class="dropdown-content">
+      <a href='buyerHistory.jsp'>View Your History of Bidding</a>
+      <a href='question.jsp'>Ask a Question</a>
+     <a href='removeBid.jsp'>Request to remove a bid</a>
+    </div>
+  </li>
+
+  
+  
+  <li><a href='logout.jsp'>Log out</a></li>
+</ul>
+
+<div class="box">
+
 <h1>Welcome <%out.print(session.getAttribute("name")); %></h1>
-<p><a href='searchItems.jsp'>Click this link to search for jewelry</a></p>
-<p><a href='buyerHistory.jsp'>Click this link to see your history of bidding</a></p>
-<p><a href='sellerDash.jsp'>Click this link for the seller dashboard</a></p>
-<p><a href='logout.jsp'>Log out</a></p>
-<b>Your current alerts</b>
+
+
+
+<h3>Your current alerts</h3>
 <table border='4'>
 <tr>
-<th>Name of Jewelry</th>
+<th>Name of Jewelry and ID</th>
 <th>Current Bid</th>
 <th>Closing date</th>
 </tr>
@@ -40,7 +60,7 @@ ResultSet result1 = stmt1.executeQuery(str1);
 if(result1.next()){
 currentCost = result1.getString("cb.cost");
 }
-out.print("<tr><th><a href='jewelryPage.jsp?id=" + id + "'>" +name + "</a></th>");
+out.print("<tr><th><a href='jewelryPage.jsp?id=" + id + "'>NAME: " +name + "  ID: "+id+"</a></th>");
 out.print("<th>" + currentCost +"</th>");
 out.print("<th>"+ date + "</th></tr>");
    			 
@@ -50,13 +70,13 @@ con.close();
 </table>
 <br>
 <br>
-<b>YOUR EMAILS</b>
+<h3>EMAILS SENT TO YOU</h3>
 <table border='4'>
 <tr>
 <td>From</td>
 <td>Subject</td>
 <td>Content</td>
-<td>Time</td>
+<td>Time Sent</td>
 </tr>
 <%
 Connection con1 = db.getConnection();
@@ -74,27 +94,24 @@ out.print("<th>" + theSubject +"</th>");
 out.print("<th>"+content + "</th>");
 out.print("<th>"+date_time+"</th></tr>");    
 }
+con1.close();
 %>
 </table>
 <br>
-<a href='email.jsp'>Send an email to a customer representative or another user!</a>
-<p><a href='forum.jsp'>Click this link to view questions asked</a></p>
-<p><a href='question.jsp'>Click this link to ask a question</a></p>
-<p><a href='removeBid.jsp'>Click this link to request to remove a bid</a></p>
 <br>
 <br>
 <br>
-<b>EMAILS FROM BUYME</b>
+<h3>EMAILS FROM BUYME</h3>
 <table border='4'>
 <tr>
-<td>Type Of notification</td>
+<td>Type Of Notification</td>
 <td>ID of jewelry</td>
 <td>Content</td>
-<td>Time</td>
+<td>Time Sent</td>
 </tr>
 <%
 Connection con2 = db.getConnection();
-Statement stmt3 = con1.createStatement();
+Statement stmt3 = con2.createStatement();
 	 
 str = "SELECT name, id, content, timeOF FROM auctionInfo WHERE email='"+session.getAttribute("username")+"'";
 ResultSet result2 = stmt3.executeQuery(str);
@@ -108,13 +125,14 @@ out.print("<th>" + id +"</th>");
 out.print("<th>"+content + "</th>");
 out.print("<th>"+time+"</th></tr>");    
 }
+con2.close();
 %>
 </table>
 
 <br>
 
-<p><a href='buyerHistory.jsp'>Click this link to see your history of bidding</a></p>
-<p><a href='sellerDash.jsp'>Click this link for the seller dashboard</a></p>
+<p><a href='sellerDash.jsp'>Seller Dashboard</a></p>
 <p><a href='logout.jsp'>Log out</a></p>
+</div>
 </body>
 </html>

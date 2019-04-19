@@ -11,11 +11,11 @@ pageEncoding="ISO-8859-1" import="com.cs336.pkg.*"%>
 <title>Admin</title>
 </head>
 <body>
-<b>Create an account for a customer representative</b>
+<h3>Create an Account for a Customer Representative</h3>
 <br>
 <br>
 <form method="post" action="createCustomerRep.jsp">
-<table>
+<table border ="4">
 <tr>
 <td>First Name:</td><td><input type="text" name="firstName"></td>
 </tr>
@@ -33,13 +33,16 @@ pageEncoding="ISO-8859-1" import="com.cs336.pkg.*"%>
 </tr>
 
 </table>
-<input type="submit" value="submit" class="button">
+<br>
+
+<br>
+<input type="submit" value="Create Customer Representative" class="button">
 </form>
 <br>
 
 <br>
 <form method="get" action="salesHistory.jsp" name="salesReport">
-<table>
+<table border="4">
 <tr>
 	<td>Get Sales Report:</td>
 	<td>
@@ -55,7 +58,10 @@ pageEncoding="ISO-8859-1" import="com.cs336.pkg.*"%>
 	</td>
 </tr>
 </table>
-<input type="submit" value="submit" class="button">
+<br>
+
+<br>
+<input type="submit" value="Get Sales Report" class="button">
 </form>
 <br>
 

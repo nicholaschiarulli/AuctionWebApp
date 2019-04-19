@@ -7,34 +7,39 @@ pageEncoding="ISO-8859-1" import="com.cs336.pkg.*"%>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<link rel="stylesheet" type="text/css" href="css/index.css"/>
+<link rel="stylesheet" type="text/css" href="css/initial.css"/>
 <title>Register</title>
 </head>
 <body>
-<div id="box">
+<div class="backg">
+<div class="shadowg backg-inner">
+<div class="container">
+           
 <form method="post" action="registerPage.jsp">
 <table>
 <tr>    
-<td>Email: </td><td><input type="text" name="email"></td>
+<td class ="coll">Email: </td><td><input type="text" name="email"></td>
 </tr>
 <tr>
-<td>Password: </td><td><input type="password" name="password"></td>
+<td class ="coll">Password: </td><td><input type="password" name="password"></td>
 </tr>
 <tr>
-<td>Confirm Password: </td><td><input type="password" name="passwordConfirm"></td>
+<td class ="coll">Confirm Password: </td><td><input type="password" name="passwordConfirm"></td>
 </tr>
 <tr>
-<td>First Name: </td><td><input type="text" name="firstName"></td>
+<td class ="coll">First Name: </td><td><input type="text" name="firstName"></td>
 </tr>
 <tr>
-<td>Last Name: </td><td><input type="text" name="lastName"></td>
+<td class ="coll">Last Name: </td><td><input type="text" name="lastName"></td>
 </tr>
 <tr>
-<td><input type="radio" name="seller" value="yes" /> Check if you are registering as a seller</td>
-<td><input type="radio" name="seller" value="no" /> Check if you are registering as a buyer</td>
-</tr>
+<td class ="coll"><input type="radio" name="seller" value="yes" class="rad"/> Check if you are registering as a seller</td>
 <tr>
-<td><p> Do not worry you can add on the one you did not chose later if you want to</p></td>
+<td class ="coll"><input type="radio" name="seller" value="no" class="rad"/> Check if you are registering as a buyer</td>
+</tr>
+
+<tr>
+<td><h3> Do not worry you can add on the one you did not chose later if you want to</h3></td>
 </tr>
 </table>
 <br>
@@ -45,6 +50,7 @@ pageEncoding="ISO-8859-1" import="com.cs336.pkg.*"%>
 <input type="submit" value="Back to log in" class="button">
 </form>
 </div>
-
+</div>
+</div>
 </body>
 </html>

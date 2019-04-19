@@ -6,7 +6,7 @@ pageEncoding="ISO-8859-1" import="com.cs336.pkg.*"%>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<link rel="stylesheet" type="text/css" href="css/index.css"/>
+<link rel="stylesheet" type="text/css" href="css/logPage.css"/>
 <title>Dash</title>
 </head>
 <body>
@@ -34,9 +34,12 @@ session.setAttribute("name", firstName);
 //if(isSeller==0){
  //response.sendRedirect("dash.jsp");
  
-out.println("<h1 >Choose a dashboard!</h1>");
-out.println("<a href='dash.jsp'>Buyer Dashboard</a>");
-out.println("<a href='sellerDash.jsp'>Seller Dashboard</a>");
+
+%>
+<h1 >Choose a dashboard!</h1>
+<a href='dash.jsp'>Buyer Dashboard</a>
+<a href='sellerDash.jsp'>Seller Dashboard</a>
+<%
 //	}
 //else{
 		

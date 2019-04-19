@@ -12,8 +12,8 @@
 <body>
 <%String act = "autoBidTester.jsp?id=" + request.getParameter("id") + "&name=" + request.getParameter("name"); %>
 <form method="post" action=<%=act%>>
-<p> Jewelry ID: <font color = "green"> <% out.print(request.getParameter("id")); %></font> </p>
-<table>
+<p> Jewelry ID: <font color = "white"> <% out.print(request.getParameter("id")); %></font> </p>
+<table border="4">
 <tr >    
 <td>Max Value: </td>
 <td> <input type="text" name="maxVal"> </td>
@@ -22,6 +22,7 @@
 <br>
 <input type="submit" value="Set Auto Bid" class="button">
 </form>
-<% out.print("<a href='jewelryPage.jsp?id=" + request.getParameter("id") + "&name=" + request.getParameter("name") + "'>cancel</a>"); %>
+<br>
+<% out.print("<a href='jewelryPage.jsp?id=" + request.getParameter("id") + "&name=" + request.getParameter("name") + "'>Cancel</a>"); %>
 </body>
 </html>

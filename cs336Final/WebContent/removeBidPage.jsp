@@ -12,24 +12,26 @@ pageEncoding="ISO-8859-1" import="com.cs336.pkg.*"%>
 <body>
 <%
 String emailParam = request.getParameter("email");
-String newPasswordParam = request.getParameter("password");
+String jewelryID = request.getParameter("jewelryID");
 Timestamp duration = new Timestamp(System.currentTimeMillis());
 try{
-if(emailParam.isEmpty()|| newPasswordParam.isEmpty()){
-out.println("Please fill in both fields");		
+if(emailParam.isEmpty()|| jewelryID.isEmpty()){
+out.println("Please fill in both fields");
+
+		
 }
 else{
 ApplicationDB DB = new ApplicationDB();	
 Connection con = DB.getConnection();
-String str = "insert into Email values (?, ?, ?, ?,?);";
+String str = "insert into Email values (?, ?, ?, ?, ?);";
 PreparedStatement ps = con.prepareStatement(str);
 ps.setString(1, emailParam);
 ps.setString(2, "CR");
 ps.setTimestamp(3, duration);
-ps.setString(4,"ResetMyPassword");
-ps.setString(5,"Please set my new password to: "+newPasswordParam);
+ps.setString(4,"Remove Bid");
+ps.setString(5,"Remove my Bid Please. Jewelry ID is: "+jewelryID);
 ps.executeUpdate();
-out.println("Succesfully sent a reset password request to a customer representative. When a customer representative logs in they will see your request and change it if they believe it is appropriate.");
+out.println("Succesfully sent a remove bid request to a customer representative. When a customer representative logs in they will see your request and change it if they believe it is appropriate.");
 con.close();
 }
 } catch (Exception x) {

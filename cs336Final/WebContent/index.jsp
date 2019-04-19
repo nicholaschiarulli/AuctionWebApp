@@ -7,21 +7,22 @@ pageEncoding="ISO-8859-1"%>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Login Page</title>
-<link rel="stylesheet" type="text/css" href="css/index.css"/>
+<link rel="stylesheet" type="text/css" href="css/initial.css"/>
 </head>
 <body>
 
-<h1>WELCOME TO BUYME</h1>
-
-<div id="box">
-		
+<div class="backg">
+<div class="shadowg backg-inner">
+<div class="container">
+         
+<h1 style="color:white;">WELCOME TO BUYME</h1>
 <form method="post" action="loginPage.jsp">
 <table>
 <tr >    
-<td>Email: </td><td><input type="text" name="email"></td>
+<td class ="coll">Email: </td><td><input type="text" name="email"></td>
 </tr>
 <tr >
-<td>Password: </td><td><input type="password" name="password"></td>
+<td class ="coll">Password: </td><td><input type="password" name="password"></td>
 </tr>
 </table>
 <br>
@@ -41,10 +42,10 @@ pageEncoding="ISO-8859-1"%>
 	
 <table>
 <tr>    
-<td>CR Email: </td><td><input type="text" name="email"></td>
+<td class ="coll">CR Email: </td><td><input type="text" name="email"></td>
 </tr>
 <tr>
-<td>Password: </td><td><input type="password" name="password"></td>
+<td class ="coll">Password: </td><td><input type="password" name="password"></td>
 </tr>
 </table>
 <br>
@@ -56,15 +57,18 @@ pageEncoding="ISO-8859-1"%>
 <form method="post" action="adminStaff.jsp">
 <table>
 <tr>    
-<td>AS Email: </td><td><input type="text" name="email"></td>
+<td class ="coll">AS Email: </td><td><input type="text" name="email"></td>
 </tr>
 <tr>
-<td>Password: </td><td><input type="password" name="password"></td>
+<td class ="coll">Password: </td><td><input type="password" name="password"></td>
 </tr>
 </table>
 <br>
 <input type="submit" value="Administrative Staff Login" class="button"><br>
 </form>
 </div>
+</div>
+</div>
+      
 </body>
 </html>

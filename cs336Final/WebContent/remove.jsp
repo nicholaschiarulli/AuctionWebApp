@@ -16,10 +16,45 @@ pageEncoding="ISO-8859-1" import="com.cs336.pkg.*"%>
 ///set that value to the new currentBid on that jewelryID
 //Then remove the bid using the bidID to complete the process
 try{
+int cost = 0;
+int bid =0;
+int initialBid = 0;
+String email = "";
 String emailParam = request.getParameter("email");
 int jewelryID = Integer.parseInt(request.getParameter("jewelryID"));
-} catch(Exception ex) {
-out.println(ex);
+ApplicationDB db = new ApplicationDB();	
+Connection con = db.getConnection();
+Statement stmt = con.createStatement();
+String str = "SELECT * FROM Bid where jewelryID ="+jewelryID+" ORDER BY cost DESC LIMIT 2;";
+ResultSet result = stmt.executeQuery(str);
+if(result.next()){
+initialBid = result.getInt("BidID");
+
+}
+if(emailParam!= result.getString("email")){
+out.println("A customer cannot request to remove the bid of another customer");
+}
+while(result.next()){
+cost= result.getInt("cost");
+bid = result.getInt("BidID");
+email = result.getString("email");
+
+
+}
+str ="DELETE FROM Bid WHERE BidID = "+initialBid+" ";
+PreparedStatement ps1 = con.prepareStatement(str);
+ps1.executeUpdate();
+
+str ="INSERT INTO CurrentBid values(?,?,?,?)";
+PreparedStatement ps = con.prepareStatement(str);
+ps.setInt(1, jewelryID);
+ps.setInt(2, bid);
+ps.setString(3, email);
+ps.setInt(4, cost);
+ps.executeUpdate();
+out.println(cost);
+con.close();
+} catch(Exception x) {
 }
 %>
 <a href='customerRepresentativePage.jsp'>Back to Customer Representative Page</a>

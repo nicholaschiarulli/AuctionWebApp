@@ -10,6 +10,24 @@ pageEncoding="UTF-8" import="com.cs336.pkg.*"%>
 <title>Seller dash</title>
 </head>
 <body>
+<ul>
+<li><a href='dash.jsp'>Buyer Dashboard</a></li>
+  <li><a href='auction.jsp'>Post an Item For Auction</a></li>
+    <li><a href='forum.jsp'>Browse Questions Asked</a></li>
+   <li> <a href='email.jsp'>Send an Email</a></li>
+    
+  <li class="dropdown">
+    <a href="javascript:void(0)" class="dropbtn">Menu</a>
+    <div class="dropdown-content">
+      <a href='sellerHistory.jsp'>View Your History of Selling</a>
+      <a href='question.jsp'>Ask a Question</a>
+    </div>
+  </li>
+
+  
+  
+  <li><a href='logout.jsp'>Log out</a></li>
+</ul>
 <h1>Seller Dashboard</h1>
 <%
 try {
@@ -65,7 +83,7 @@ con.close();
 <td>Type Of notification</td>
 <td>ID of jewelry</td>
 <td>Content</td>
-<td>Time</td>
+<td>Time Sent</td>
 </tr>
 <%
 Connection con1 = db.getConnection();
@@ -89,7 +107,6 @@ out.print("<th>"+time+"</th></tr>");
 <br>
 <%
 
-out.println("<p><a href='auction.jsp'>Put an item up for auction!</a><p>");
 			
 con1.close();
 }
@@ -108,8 +125,6 @@ out.println("error");
 
 <p><a href='dash.jsp'>Click this link for the basic dashboard</a></p>
 <p><a href='sellerHistory.jsp'>Click to see your seller history</a></p>
-<p><a href='question.jsp'>Click this link to ask a question</a></p>
-<p><a href='forum.jsp'>Click this link to view questions asked</a></p>
 <p><a href='logout.jsp'>Log out</a></p>
 </body>
 </html>

@@ -59,7 +59,7 @@ out.println("The buyer's history who you are attempting to view has deleted his 
 }
 %>
 </table>
-<p><a href='dash.jsp'>Click this link for the basic dashboard</a></p>
+<p><a href='dash.jsp'>Buyer/Basic DashBoard</a></p>
 <p><a href='logout.jsp'>Log out</a></p>
 </body>
 </html>

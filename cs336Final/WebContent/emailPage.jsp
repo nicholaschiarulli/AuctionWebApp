@@ -12,32 +12,30 @@ pageEncoding="ISO-8859-1" import="com.cs336.pkg.*"%>
 <body>
 <%
 String emailParam = request.getParameter("email");
+String subject = request.getParameter("subject");
+String content = request.getParameter("content");
+String email_username = ""+session.getAttribute("username");
 String newPasswordParam = request.getParameter("password");
 Timestamp duration = new Timestamp(System.currentTimeMillis());
 try{
-if(emailParam.isEmpty()|| newPasswordParam.isEmpty()){
-out.println("Please fill in both fields");		
-}
-else{
 ApplicationDB DB = new ApplicationDB();	
 Connection con = DB.getConnection();
 String str = "insert into Email values (?, ?, ?, ?,?);";
 PreparedStatement ps = con.prepareStatement(str);
-ps.setString(1, emailParam);
-ps.setString(2, "CR");
+ps.setString(1, email_username);
+ps.setString(2, emailParam);
 ps.setTimestamp(3, duration);
-ps.setString(4,"ResetMyPassword");
-ps.setString(5,"Please set my new password to: "+newPasswordParam);
+ps.setString(4,subject);
+ps.setString(5, content);
 ps.executeUpdate();
-out.println("Succesfully sent a reset password request to a customer representative. When a customer representative logs in they will see your request and change it if they believe it is appropriate.");
+out.println("Succesfully sent an email to  "+emailParam+" ");
 con.close();
-}
 } catch (Exception x) {
 out.println("could not submit request email does not exist in our database. You may have entered your information wrong.");
 }
 %>
-<a href='removeBid.jsp'>Back to Form</a>
-<br>
-<a href='dash.jsp'>Back to Dashboard</a>
+<a href='dash.jsp'>Back to buyer/basic Dashboard</a>
+<a href='sellerDash.jsp'>Back to seller Dashboard</a>
+
 </body>
 </html>

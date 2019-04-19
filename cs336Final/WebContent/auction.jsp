@@ -10,6 +10,13 @@ pageEncoding="ISO-8859-1" import="com.cs336.pkg.*"%>
 <title>auction</title>
 </head>
 <body>
+<ul>
+<li><a href='sellerDash.jsp'>Seller Dashboard</a></li>
+<li><a href='dash.jsp'>Buyer Dashboard</a></li>
+  <li><a href='searchItems.jsp'>Search for Jewelry</a></li>
+
+  <li><a href='logout.jsp'>Log out</a></li>
+</ul>
 <h1>Post an Item!</h1>
 
 <form method="post" action="auctionPost.jsp">
@@ -94,7 +101,6 @@ pageEncoding="ISO-8859-1" import="com.cs336.pkg.*"%>
 <br>
 <input class="button" type="submit" value="Post item to the auction page!">
 </form>
-<p><a href='sellerDash.jsp'>Click this link to go back to the seller dashboard</a></p>
 
 <p><a href='logout.jsp'>Log out</a></p>
 </body>
