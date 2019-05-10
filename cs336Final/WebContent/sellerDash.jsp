@@ -10,16 +10,20 @@ pageEncoding="UTF-8" import="com.cs336.pkg.*"%>
 <title>Seller dash</title>
 </head>
 <body>
+<%if(session.getAttribute("username") ==null){
+	response.sendRedirect("invalidated.jsp");
+} %>
 <ul>
 <li><a href='dash.jsp'>Buyer Dashboard</a></li>
   <li><a href='auction.jsp'>Post an Item For Auction</a></li>
-    <li><a href='forum.jsp'>Browse Questions Asked</a></li>
+    
    <li> <a href='email.jsp'>Send an Email</a></li>
     
   <li class="dropdown">
     <a href="javascript:void(0)" class="dropbtn">Menu</a>
     <div class="dropdown-content">
       <a href='sellerHistory.jsp'>View Your History of Selling</a>
+      <a href='forum.jsp'>Browse Questions Asked</a>
       <a href='question.jsp'>Ask a Question</a>
     </div>
   </li>
@@ -27,6 +31,7 @@ pageEncoding="UTF-8" import="com.cs336.pkg.*"%>
   
   
   <li><a href='logout.jsp'>Log out</a></li>
+  <li><a href='delete.jsp'>Deactivate your Account</a></li>
 </ul>
 <h1>Seller Dashboard</h1>
 <%

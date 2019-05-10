@@ -11,6 +11,11 @@
 </head>
 <body>
 
+
+<%if(session.getAttribute("username") == null){
+	response.sendRedirect("invalidated.jsp");
+} %>
+
 <% 
 
 String name = "";
@@ -18,6 +23,7 @@ String condition = "";
 String color = "";
 String type = "";
 String brand = "";
+String size = "";
 String datePosted = "";
 String emailOfSeller = "";
 String closingDate = "";
@@ -40,6 +46,7 @@ brand = result.getString("brand");
 datePosted = result.getString("datePosted");
 emailOfSeller = result.getString("emailOfSeller");
 status = result.getInt("status");
+size = result.getString("size");
 } 
 str = "SELECT * FROM infoOfBid WHERE jewelryID = '" + jewelryID + "';";
 result = stmt.executeQuery(str);
@@ -63,7 +70,7 @@ con.close();
 <ul>
   <li><a href='dash.jsp'>Buyer/basic Dashboard</a></li>
   <li><a href='sellerDash.jsp'>Seller Dashboard</a></li>
-<li><a href='alert.jsp?id="+jewelryID+"'>Place an Alert on this Item</a></li>
+<li><a href='alert.jsp?id=<%=jewelryID%>&type=<%=type%>&color=<%=color%>&brand=<%=brand%>&size=<%=size%>&name=<%=name%>'>Place an Alert on this Item</a></li>
   <li><a href='searchItems.jsp'>Search for Jewelry</a></li>
   
    
@@ -102,6 +109,9 @@ con.close();
 </tr>
 <tr>
 <td>Color: </td><td><%=color %></td>
+</tr>
+<tr>
+<td>Size: </td><td><%=size %></td>
 </tr>
 <tr>
 <td>Initial Price: </td><td><%=startingPrice %></td>

@@ -10,6 +10,11 @@ pageEncoding="ISO-8859-1" import="com.cs336.pkg.*"%>
 <title>Only Seller</title>
 </head>
 <body>
+
+<%if(session.getAttribute("username") == null){
+	response.sendRedirect("invalidated.jsp");
+} %>
+
 <%
 String email = ""+session.getAttribute("username");
 int jewelryID = Integer.parseInt(request.getParameter("id"));
@@ -23,6 +28,7 @@ if(result.getString("emailOfSeller").equals(email)){
 out.println("You cannot place a bid on your own item!");
 //	out.print("below are two links. You can either head back to the jewelry page or become a buyer as well!");
 out.println("<a href='jewelryPage.jsp?id=" + jewelryID + "'>Cick This To Go Back To The Item</a>");
+con.close();
 //out.println("<a href='becomeBuyer.jsp'>Become a buyer as well</a>");
 } /* else if(result1.next()) {
 out.println("<a href='becomeBuyer.jsp'>Become a buyer as well</a>");

@@ -10,18 +10,34 @@ pageEncoding="ISO-8859-1" import="com.cs336.pkg.*"%>
 <title>alert</title>
 </head>
 <body>
+
+<%if(session.getAttribute("username") == null){
+	response.sendRedirect("invalidated.jsp");
+} %>
+
 <%
-String jewelryID_Param = request.getParameter("id");
-out.print("The Jewelry ID that you set an alert on is "+jewelryID_Param);
+int jewelryID = Integer.parseInt(request.getParameter("id"));
+String type = request.getParameter("type");
+String name = request.getParameter("name");
+String color = request.getParameter("color");
+String size = request.getParameter("size");
+String brand = request.getParameter("brand");
+
+out.print("The Jewelry ID that you set an alert on is "+jewelryID);
 try {
 ApplicationDB db = new ApplicationDB();	
 Connection con = db.getConnection();
 Statement stmt = con.createStatement();
 String email = ""+session.getAttribute("username");
-String str = "INSERT INTO alert values (?, ?);";
+String str = "INSERT INTO alert values (?, ?, ?, ?, ?, ?, ?);";
 PreparedStatement ps = con.prepareStatement(str);
 ps.setString(1, email);
-ps.setString(2, jewelryID_Param);
+ps.setInt(2, jewelryID);
+ps.setString(3, name);
+ps.setString(4, type);
+ps.setString(5, color);
+ps.setString(6, size);
+ps.setString(7, brand);
 ps.executeUpdate();
 out.print("<h1>Alerted. All of your alerts will appear on the basic DashBoard.</h1>");
 con.close();

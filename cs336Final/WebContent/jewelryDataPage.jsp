@@ -11,6 +11,10 @@
 </head>
 <body>
 
+<%if(session.getAttribute("username") == null){
+	response.sendRedirect("invalidated.jsp");
+} %>
+
 <% 
 
 String name = "";

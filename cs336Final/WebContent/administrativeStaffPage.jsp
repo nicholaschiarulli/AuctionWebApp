@@ -11,6 +11,10 @@ pageEncoding="ISO-8859-1" import="com.cs336.pkg.*"%>
 <title>Admin</title>
 </head>
 <body>
+<%if(session.getAttribute("username") == null){
+	response.sendRedirect("invalidated.jsp");
+} %>
+
 <h3>Create an Account for a Customer Representative</h3>
 <br>
 <br>
@@ -49,10 +53,10 @@ pageEncoding="ISO-8859-1" import="com.cs336.pkg.*"%>
 	<select name="sales">
 	<option></option>
 	<option value="1">Total Earnings</option>
-	<option value="2">Earnings Per Item</option>
-	<option value="3">Earnings Per Item Type</option>
-	<option value="4">Earnings Per End-User</option>
-	<option value="5">Best Selling Items </option>
+	<option value="2">Earnings Per Jewelry</option>
+	<option value="3">Earnings Per Jewelry Type</option>
+	<option value="4">Earnings Per Seller</option>
+	<option value="5">Best Selling Jewelry </option>
 	<option value="6">Best Buyers </option>
 	</select>
 	</td>

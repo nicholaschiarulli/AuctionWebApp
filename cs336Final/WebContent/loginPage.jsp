@@ -15,19 +15,25 @@ String passwordParam = request.getParameter("password");
 String emailParam = request.getParameter("email");
 if(passwordParam.isEmpty() || emailParam.isEmpty()) {
 out.println("<h1>Password or email field was empty. Please fill both in.</h1>");
-} 
+}  
 else {
 try { 	
 ApplicationDB db = new ApplicationDB();	
 Connection con = db.getConnection();
 Statement stmt = con.createStatement();
-String str = "SELECT password, firstName FROM customer WHERE email=" + "'"+emailParam+"';" ;
+String str = "SELECT password, firstName, removed FROM customer WHERE email=" + "'"+emailParam+"';" ;
 ResultSet result = stmt.executeQuery(str);
 if(result.next()){
 String password = result.getString("password");
 String firstName = result.getString("firstName");
+int removed = result.getInt("removed");
 //int isSeller = result.getInt("isSeller");		
 con.close();
+if(removed==1){
+out.println("<h1>This Account was Deactivated</h1>");
+}
+else{
+
 if(password.equals(passwordParam)){
 session.setAttribute("username", emailParam);
 session.setAttribute("name", firstName);
@@ -51,6 +57,7 @@ else {
 out.println("Password does not match confirm password field");
 						
 }
+}
 } 
 else {
 out.println("Your email was enterred incorrectly or this username does not exist in BUYME.");
@@ -62,5 +69,8 @@ out.println("error");
 }
 }
 %>
+<form method="post" action="index.jsp">
+<input type="submit" value="Back to log in" class="button">
+</form>
 </body>
 </html>

@@ -9,6 +9,11 @@ pageEncoding="ISO-8859-1" import="com.cs336.pkg.*"%>
 <title>Buyer's History</title>
 </head>
 <body>
+
+<%if(session.getAttribute("username") == null){
+	response.sendRedirect("invalidated.jsp");
+} %>
+
 <h2>Buyer History!</h2>
 
 <table border='4'>

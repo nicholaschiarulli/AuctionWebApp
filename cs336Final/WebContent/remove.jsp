@@ -10,6 +10,11 @@ pageEncoding="ISO-8859-1" import="com.cs336.pkg.*"%>
 <title>remove</title>
 </head>
 <body>
+
+<%if(session.getAttribute("username") == null){
+	response.sendRedirect("invalidated.jsp");
+} %>
+
 <%
 
 //Find next highest value in cost column for bid for jewelryId. 
@@ -25,6 +30,12 @@ int jewelryID = Integer.parseInt(request.getParameter("jewelryID"));
 ApplicationDB db = new ApplicationDB();	
 Connection con = db.getConnection();
 Statement stmt = con.createStatement();
+String str0 = "SELECT * FROM CurrentBid where jewelryID ="+jewelryID+" and email ='"+emailParam+"';";
+ResultSet result0 = stmt.executeQuery(str0);
+if(result0.next()){
+
+
+
 String str = "SELECT * FROM Bid where jewelryID ="+jewelryID+" ORDER BY cost DESC LIMIT 2;";
 ResultSet result = stmt.executeQuery(str);
 if(result.next()){
@@ -32,8 +43,9 @@ initialBid = result.getInt("BidID");
 
 }
 if(emailParam!= result.getString("email")){
-out.println("A customer cannot request to remove the bid of another customer");
+out.println("<h1>A customer cannot request to remove the bid of another customer</h1>");
 }
+else{
 while(result.next()){
 cost= result.getInt("cost");
 bid = result.getInt("BidID");
@@ -53,8 +65,16 @@ ps.setString(3, email);
 ps.setInt(4, cost);
 ps.executeUpdate();
 out.println(cost);
+}
+}
+else{
+out.println("<h1>You cannot remove this bid it is not the current bid</h1>");
+	
+}
 con.close();
 } catch(Exception x) {
+	out.println(x);
+
 }
 %>
 <a href='customerRepresentativePage.jsp'>Back to Customer Representative Page</a>

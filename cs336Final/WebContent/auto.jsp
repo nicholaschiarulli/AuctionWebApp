@@ -10,6 +10,11 @@
 <title>auto</title>
 </head>
 <body>
+
+<%if(session.getAttribute("username") == null){
+	response.sendRedirect("invalidated.jsp");
+} %>
+
 <%String act = "autoBidTester.jsp?id=" + request.getParameter("id") + "&name=" + request.getParameter("name"); %>
 <form method="post" action=<%=act%>>
 <p> Jewelry ID: <font color = "white"> <% out.print(request.getParameter("id")); %></font> </p>
@@ -23,6 +28,6 @@
 <input type="submit" value="Set Auto Bid" class="button">
 </form>
 <br>
-<% out.print("<a href='jewelryPage.jsp?id=" + request.getParameter("id") + "&name=" + request.getParameter("name") + "'>Cancel</a>"); %>
+<% out.print("<a href='jewelryPage.jsp?id=" + request.getParameter("id") + "'>Cancel</a>"); %>
 </body>
 </html>

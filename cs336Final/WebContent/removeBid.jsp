@@ -7,9 +7,14 @@ pageEncoding="ISO-8859-1" import="com.cs336.pkg.*"%>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <link rel="stylesheet" type="text/css" href="css/index.css"/>
-<title>Forgot Password Page</title>
+<title>removeB</title>
 </head>
 <body>
+
+<%if(session.getAttribute("username") == null){
+	response.sendRedirect("invalidated.jsp");
+} %>
+
 <div>
 <h1>This is the Form to Request the Removal of a Bid</h1>
 <h2>NOTE: You should only request a bid removal if you have the current bid of this item</h2>

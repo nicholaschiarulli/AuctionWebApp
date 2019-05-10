@@ -11,6 +11,10 @@ pageEncoding="ISO-8859-1"%>
 <link rel="stylesheet" type="text/css" href="css/index.css"/>
 </head>
 <body>
+<%if(session.getAttribute("username") == null){
+	response.sendRedirect("invalidated.jsp");
+} %>
+
 <ul>
 <li><a href='dash.jsp'>Buyer Dashboard</a></li>
 <li><a href='sellerDash.jsp'>Seller Dashboard</a></li>

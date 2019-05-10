@@ -10,6 +10,11 @@
 <title>Auto Bid</title>
 </head>
 <body>
+
+<%if(session.getAttribute("username") == null){
+	response.sendRedirect("invalidated.jsp");
+} %>
+
 <%
 int id = Integer.parseInt(request.getParameter("id"));
 int maxVal = Integer.parseInt(request.getParameter("maxVal"));
@@ -23,6 +28,35 @@ try
 ApplicationDB db = new ApplicationDB();	
 Connection con = db.getConnection();
 Statement stmt = con.createStatement();
+
+String str0 = "select email from Auto where jewelryID = "+id+";";
+
+ResultSet result0 = stmt.executeQuery(str0);
+Statement stmtz = con.createStatement();
+String strz = "SELECT emailOfSeller FROM jewelry WHERE jewelryID = "+id;
+ResultSet resultz = stmtz.executeQuery(strz);
+
+if(result0.next()){
+	out.println("<h1>Sorry someone has already set an Auto Bid on this item.</h1>");
+	out.println("<h1>We have a policy that not more than one account can have an Auto Bid on an item.</h1>");
+
+	con.close();
+}
+
+
+
+
+else if(resultz.next()){
+if(resultz.getString("emailOfSeller").equals(email)){
+out.println("You cannot place an Auto Bid on your own item!");
+//	out.print("below are two links. You can either head back to the jewelry page or become a buyer as well!");
+con.close();
+//out.println("<a href='becomeBuyer.jsp'>Become a buyer as well</a>");
+}
+}
+else{
+
+
 String str = "select increment from infoOfBid where jewelryID = "+id+";";
 ResultSet result = stmt.executeQuery(str);
 
@@ -48,7 +82,7 @@ if(total> maxVal){
 out.println("The Auto bid is set up!");
 response.sendRedirect("bidPage.jsp?id=" + request.getParameter("id") + "&bidAmount=" + total+ "");
 }
-
+}
 }
 catch (Exception ex) 
 {
@@ -56,7 +90,7 @@ catch (Exception ex)
 out.println("error");
 }
 
-out.println("<p><a href='jewelryPage.jsp?id=" + request.getParameter("id") + "&name=" + request.getParameter("name") + "'>Back</a></p>");
+out.println("<p><a href='jewelryPage.jsp?id=" + request.getParameter("id")+"'>Back</a></p>");
 out.println("<p><a href='dash.jsp'>Buyer Dashboard</a></p>");
 out.println("<p><a href='logout.jsp'>Log out</a></p>");
 %>

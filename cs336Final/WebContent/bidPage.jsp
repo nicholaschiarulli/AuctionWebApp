@@ -10,6 +10,11 @@ pageEncoding="ISO-8859-1" import="com.cs336.pkg.*"%>
 <title>bidPage</title>
 </head>
 <body>
+
+<%if(session.getAttribute("username") == null){
+	response.sendRedirect("invalidated.jsp");
+} %>
+
 <%
 String email = ""+session.getAttribute("username");
 int jewelryID = Integer.parseInt(request.getParameter("id"));
@@ -27,6 +32,7 @@ ps.setInt(3,jewelryID);
 ps.setString(4,email);
 ps.executeUpdate();
 con.close();
+out.println("<h1>BID SUCCESSFULLY MADE</h1>");
 } catch (SQLException ex) {
 //out.println(ex);
 if(ex.getSQLState().equals("20000")){
@@ -35,7 +41,7 @@ try{
 ApplicationDB db = new ApplicationDB();	
 Connection con = db.getConnection();
 Statement stmt = con.createStatement();
-String str="delete from Bid where jewelryID="+jewelryID+" and cost="+bidParam;
+String str="DELETE from Bid where jewelryID="+jewelryID+" and cost="+bidParam;
 stmt.execute(str);
 con.close();
 out.println("<p>Your bid must be at least whatever the seller's increment number was plus the current price of the item!</p>");				
@@ -52,39 +58,39 @@ out.println("<p>You can go back to the previous item and read the increment and 
 
 else{
 	
-	try{
+try{
 		
-		ApplicationDB db = new ApplicationDB();	
-		
-		Connection con = db.getConnection();
-		Statement stmt = con.createStatement();
-		
-		String str="select * from infoOfBid where jewelryID="+jewelryID;
-		ResultSet result1 = stmt.executeQuery(str);
-		int increment = 0;
-		String e="";
-		if(result1.next()){
-			increment = result1.getInt("increment");
-		}
-		bidParam = increment+bidParam;
-		str = "select * from Auto where jewelryID ="+jewelryID;
-		ResultSet result2 = stmt.executeQuery(str);
-		if(result2.next()){
-			e=result2.getString("email");
-		}
-		str = "UPDATE Bid set cost = "+bidParam+" where jewelryID="+jewelryID+" and email='"+e+"' order by cost limit 1";
-		PreparedStatement ps = con.prepareStatement(str);
-		ps.executeUpdate();
-		con.close();
-	} catch (Exception xx){
-		out.println(xx);
-	}
+ApplicationDB db = new ApplicationDB();	
+
+Connection con = db.getConnection();
+Statement stmt = con.createStatement();
+
+String str="select * from infoOfBid where jewelryID="+jewelryID;
+ResultSet result1 = stmt.executeQuery(str);
+int increment = 0;
+String e="";
+if(result1.next()){
+	increment = result1.getInt("increment");
+}
+bidParam = increment+bidParam;
+str = "select * from Auto where jewelryID ="+jewelryID;
+ResultSet result2 = stmt.executeQuery(str);
+if(result2.next()){
+	e=result2.getString("email");
+}
+str = "UPDATE Bid set cost = "+bidParam+" where jewelryID="+jewelryID+" and email='"+e+"' order by cost limit 1";
+PreparedStatement ps = con.prepareStatement(str);
+ps.executeUpdate();
+con.close();
+} catch (Exception xx){
+out.println("ERROR. Something Went Wrong With an Auto Bid");
+}
 }
 
 	
 }
 %>
 <p><a href='jewelryPage.jsp?id=<%=jewelryID%>'>Click to go back to jewelry item you were looking at</a></p>
-<a href='dash.jsp'>Click to go back to dashboard</a>
+<a href='dash.jsp'>Click to go back to Buer/Basic Dashboard</a>
 </body>
 </html>

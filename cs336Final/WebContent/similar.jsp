@@ -9,43 +9,48 @@
 <title>Similar Items</title>
 <head></head>
 <body>
+
+<%if(session.getAttribute("username") == null){
+	response.sendRedirect("invalidated.jsp");
+} %>
+
 	<h3>Similar Items</h3>
-	<h4>similar items are determined by color and type</h4>
+	<h4>Similar Items are Determined by Color and Type</h4>
 	<%
+	int jewelryID = Integer.parseInt(request.getParameter("id"));
 		try {
 			ApplicationDB db = new ApplicationDB();
 			Connection con = db.getConnection();
 			Statement stmt = con.createStatement();
-			int jewelryID = Integer.parseInt(request.getParameter("id"));
+			
 			String type = request.getParameter("type");
 			String color = request.getParameter("color");
 			
-			String str = "SELECT jewelryID, name, type, color, brand, emailOfSeller FROM jewelry where jewelry.type = '"
+			String str = "SELECT *FROM jewelry where jewelry.type = '"
 					+ type + "'and jewelry.color = '" + color + "';";
 			ResultSet result = stmt.executeQuery(str);
 
 			if (result.next()) {
 	%>
-	<table align="center" border="3">
+	<table border="4">
 		<tr>
 			<th>JID</th>
 			<th>Name</th>
 			<th>Type</th>
 			<th>Color</th>
 			<th>Brand</th>
+			<th>Size</th>
+			<th>Condition</th>
 			<th>Email of Seller</th>
 		</tr>
-		<%
-			do {
-		%>
-
+		
 		<tr>
-			<td align="center">
+			<td>
 				<%
 					out.println(result.getInt("jewelryID"));
 				%>
 			</td>
-			<td align="center">
+			<td>
 				<%if(jewelryID==result.getInt("jewelryID")){
 					out.println(result.getString("name")+"(This is the current item you're viewing)");
 					
@@ -54,50 +59,112 @@
 				}
 				%>
 			</td>
-			<td align="center">
+			<td>
 				<%
 					out.println(result.getString("type"));
 				%>
 			</td>
-			<td align="center">
+			<td>
 				<%
 					out.println(result.getString("color"));
 				%>
 			</td>
-			<td align="center">
+			<td>
 				<%
 					out.println(result.getString("brand"));
 				%>
 			</td>
-			<td align="center">
+				<td>
+				<%
+					out.println(result.getString("size"));
+				%>
+			</td>
+				<td>
+				<%
+					out.println(result.getString("conditionn"));
+				%>
+			</td>
+			<td>
 				<%
 					out.println(result.getString("emailOfSeller"));
 				%>
 			</td>
 		</tr>
 		<%
-			} while (result.next());
+		while (result.next()) {
+		%>
+
+		<tr>
+			<td>
+				<%
+					out.println(result.getInt("jewelryID"));
+				%>
+			</td>
+			<td>
+				<%if(jewelryID==result.getInt("jewelryID")){
+					out.println(result.getString("name")+"(This is the current item you're viewing)");
+					
+				}else{
+					out.println(result.getString("name"));
+				}
+				%>
+			</td>
+			<td>
+				<%
+					out.println(result.getString("type"));
+				%>
+			</td>
+			<td>
+				<%
+					out.println(result.getString("color"));
+				%>
+			</td>
+			<td>
+				<%
+					out.println(result.getString("brand"));
+				%>
+			</td>
+				<td>
+				<%
+					out.println(result.getString("size"));
+				%>
+			</td>
+				<td>
+				<%
+					out.println(result.getString("conditionn"));
+				%>
+			</td>
+			<td>
+				<%
+					out.println(result.getString("emailOfSeller"));
+				%>
+			</td>
+		</tr>
+		<%
+			} 
 		%>
 	</table>
 	<%
 		} else {
 	%>
-	<h3>No Items To show</h3>
+	<h1>No Items Similar to this One in the Database Currently</h1>
 	<%
 		}
 			con.close();
 		}
 
-		catch (Exception ex) {
-			out.println(ex);
+		catch (Exception x) {
+			//out.println(x);
 			out.println("error");
 		}
+		out.print("<br>");
+	out.print("<a href='jewelryPage.jsp?id=" + jewelryID + "'>Go back to Jewelry Item</a>");
+
 	%>
-	<p>
+	
 		<a href='searchItems.jsp'>Back to search</a>
-	</p>
-	<p>
+	
 		<a href='logout.jsp'>Log out</a>
-	</p>
+	
 </body>
 </html>

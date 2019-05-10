@@ -10,6 +10,9 @@ pageEncoding="ISO-8859-1" import="com.cs336.pkg.*"%>
 <title>CustomerRepresentative</title>
 </head>
 <body>
+
+
+
 <%
 String passwordParam = request.getParameter("password");
 String emailParam = request.getParameter("email");
@@ -47,5 +50,9 @@ out.println("I am sorry but we did not find your account.");
 }
 }	
 %>
+
+<form method="post" action="index.jsp">
+<input type="submit" value="Back to log in" class="button">
+</form>
 </body>
 </html>

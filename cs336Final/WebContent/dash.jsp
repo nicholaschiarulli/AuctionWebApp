@@ -11,23 +11,29 @@ pageEncoding="ISO-8859-1" import="com.cs336.pkg.*"%>
 <title>Dashboard</title>
 </head>
 <body>
+
+<%if(session.getAttribute("username") ==null){
+	response.sendRedirect("invalidated.jsp");
+} %>
 <ul>
 <li><a href='sellerDash.jsp'>Seller Dashboard</a></li>
   <li><a href='searchItems.jsp'>Search for Jewelry</a></li>
-    <li><a href='forum.jsp'>Browse Questions Asked</a></li>
+    
    <li> <a href='email.jsp'>Send an Email</a></li>
   <li class="dropdown">
     <a href="javascript:void(0)" class="dropbtn">Menu</a>
     <div class="dropdown-content">
       <a href='buyerHistory.jsp'>View Your History of Bidding</a>
+      <a href='forum.jsp'>Browse Questions Asked</a>
       <a href='question.jsp'>Ask a Question</a>
-     <a href='removeBid.jsp'>Request to remove a bid</a>
+     <a href='removeBid.jsp'>Request to Remove a Bid</a>
     </div>
   </li>
 
   
   
   <li><a href='logout.jsp'>Log out</a></li>
+  <li><a href='delete.jsp'>Deactivate your Account</a></li>
 </ul>
 
 <div class="box">
@@ -36,35 +42,47 @@ pageEncoding="ISO-8859-1" import="com.cs336.pkg.*"%>
 
 
 
-<h3>Your current alerts</h3>
+<h3>Your Current Alerts: Shows only Available Items</h3>
 <table border='4'>
 <tr>
-<th>Name of Jewelry and ID</th>
-<th>Current Bid</th>
-<th>Closing date</th>
+<th>Item Similar to your Alert</th>
+<th>The Item you Based the Alert on</th>
 </tr>
 <%
 ApplicationDB db = new ApplicationDB();    
 Connection con = db.getConnection();
-Statement stmt = con.createStatement();
-String str = "SELECT j.jewelryID, j.name, iob.closingDate FROM jewelry as j JOIN infoOfBid as iob on j.jewelryID = iob.jewelryID JOIN alert as a on a.jewelryID = j.jewelryID WHERE a.email = '" + session.getAttribute("username") + "';";
-ResultSet result = stmt.executeQuery(str);
-while(result.next()){
-int id= result.getInt("j.jewelryID");
-String name = result.getString("j.name");
-String date = result.getString("iob.closingDate");
-String currentCost = "No bids on this item currently";
-String str1 = "SELECT cb.cost FROM CurrentBid as cb join jewelry as j on cb.jewelryID = j.jewelryID WHERE j.jewelryID = " + id;
-Statement stmt1 = con.createStatement();
-ResultSet result1 = stmt1.executeQuery(str1);
-if(result1.next()){
-currentCost = result1.getString("cb.cost");
+Statement stmtt = con.createStatement();
+String strr = "SELECT * FROM alert WHERE email = '" + session.getAttribute("username") + "';";
+
+ResultSet resultt = stmtt.executeQuery(strr);
+while(resultt.next()){
+	String na = resultt.getString("name");
+	int jid = resultt.getInt("jewelryID");
+
+String t = resultt.getString("type");
+String c = resultt.getString("color");
+String s = resultt.getString("size");
+String b = resultt.getString("brand");
+String stringg = "SELECT distinct jewelryID, name FROM jewelry where status = 0 and jewelry.type = '"
+		+ t + "'and jewelry.color = '" + c + "' and jewelry.color = '"
+				+ c + "' and jewelry.size = '"
+						+ s + "' and jewelry.brand = '"
+								+ b + "';";
+Statement stmttt = con.createStatement();
+ResultSet resulttt = stmttt.executeQuery(stringg);
+while(resulttt.next()){
+	int id= resulttt.getInt("jewelryID");
+	String name = resulttt.getString("name");
+	if(jid==id){}
+	else{
+	out.print("<tr><th><a href='jewelryPage.jsp?id=" + id + "'>NAME: " +name + "  ID: "+id+"</a></th>");
+	out.print("<th><a href='jewelryPage.jsp?id=" + jid + "'>NAME: " +na + "  ID: "+jid+"</a></th>");
+
+	}
+	
 }
-out.print("<tr><th><a href='jewelryPage.jsp?id=" + id + "'>NAME: " +name + "  ID: "+id+"</a></th>");
-out.print("<th>" + currentCost +"</th>");
-out.print("<th>"+ date + "</th></tr>");
-   			 
-}
+}	
+
 con.close();
 %>
 </table>
@@ -77,22 +95,25 @@ con.close();
 <td>Subject</td>
 <td>Content</td>
 <td>Time Sent</td>
+<td>Remove Email</td>
 </tr>
 <%
 Connection con1 = db.getConnection();
 Statement stmt2 = con1.createStatement();
 	 
-str = "SELECT fromCol, date_time, theSubject, content FROM Email WHERE toCol='"+session.getAttribute("username")+"'";
+String str = "SELECT toCol, fromCol, date_time, theSubject, content FROM Email WHERE toCol='"+session.getAttribute("username")+"'";
 ResultSet result1 = stmt2.executeQuery(str);
 while(result1.next()){
 String fromCol = result1.getString("fromCol");
 String date_time = result1.getString("date_time");
 String theSubject = result1.getString("theSubject");
 String content = result1.getString("content");
+String toCol = result1.getString("toCol");
 out.print("<tr><th>" +fromCol + "</th>");
 out.print("<th>" + theSubject +"</th>");
 out.print("<th>"+content + "</th>");
-out.print("<th>"+date_time+"</th></tr>");    
+out.print("<th>"+date_time+"</th>");
+out.print("<th><a href='deleteEmail.jsp?f=" + fromCol+ "&t=" + toCol+ "&d=" + date_time+"'>Delete</a></th><tr>");   
 }
 con1.close();
 %>

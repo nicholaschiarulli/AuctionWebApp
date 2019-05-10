@@ -7,10 +7,12 @@ pageEncoding="ISO-8859-1" import="com.cs336.pkg.*"%>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <link rel="stylesheet" type="text/css" href="css/index.css"/>
-<title>Forgot Password Page</title>
+<title>email</title>
 </head>
 <body>
-
+<%if(session.getAttribute("username") == null){
+	response.sendRedirect("invalidated.jsp");
+} %>
 <ul>
 <li><a href='dash.jsp'>Buyer Dashboard</a></li>
 <li><a href='sellerDash.jsp'>Seller Dashboard</a></li>

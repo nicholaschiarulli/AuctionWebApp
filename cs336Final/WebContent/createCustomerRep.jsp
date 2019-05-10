@@ -10,6 +10,11 @@ pageEncoding="ISO-8859-1" import="com.cs336.pkg.*"%>
 <title>create customer rep</title>
 </head>
 <body>
+
+<%if(session.getAttribute("username") == null){
+	response.sendRedirect("invalidated.jsp");
+} %>
+
 <%
 try {
 ApplicationDB db = new ApplicationDB();	

@@ -10,6 +10,10 @@ pageEncoding="ISO-8859-1" import="com.cs336.pkg.*"%>
 <title>answer</title>
 </head>
 <body>
+<%if(session.getAttribute("username") == null){
+	response.sendRedirect("invalidated.jsp");
+} %>
+
 <%int idforum = Integer.parseInt(request.getParameter("idforum")); %>
 <form method="post" action="answerPage.jsp?idforum=<%=idforum %>">
 <table border="4">

@@ -10,6 +10,11 @@ pageEncoding="ISO-8859-1" import="com.cs336.pkg.*"%>
 <title>auction</title>
 </head>
 <body>
+
+<%if(session.getAttribute("username") == null){
+	response.sendRedirect("invalidated.jsp");
+} %>
+
 <ul>
 <li><a href='sellerDash.jsp'>Seller Dashboard</a></li>
 <li><a href='dash.jsp'>Buyer Dashboard</a></li>

@@ -10,6 +10,10 @@ pageEncoding="ISO-8859-1" import="com.cs336.pkg.*"%>
 <title>AP</title>
 </head>
 <body>
+<%if(session.getAttribute("username") == null){
+	response.sendRedirect("invalidated.jsp");
+} %>
+
 <%
 String emailOfSeller = ""+session.getAttribute("username");
 String name = request.getParameter("name");
@@ -22,13 +26,14 @@ String startingPrice = request.getParameter("startingPrice");
 String increment = request.getParameter("increment");
 String closingdate = request.getParameter("closingDate");
 String secretMinPrice = request.getParameter("secretMinPrice");
-Timestamp datePosted = new Timestamp(System.currentTimeMillis());
+Timestamp datePosted = new Timestamp(System.currentTimeMillis()- (60 * 60 * 4000));
 int status = 0;
 String n = null;
 /* out.println(startingPrice);
 out.println(increment);
 out.println(secretMinPrice); */
 if(name.isEmpty()||condition.isEmpty() || type.isEmpty()||startingPrice.isEmpty()||closingdate.isEmpty()||increment.isEmpty()||secretMinPrice.isEmpty()||Integer.parseInt(secretMinPrice) < Integer.parseInt(increment)){
+	out.println(closingdate);
 out.print("<h1>You did not fill in all the fields or your Secret Minimum Price was less than your increment field. Please go back and try again.</h1>");
 }
 else if(datePosted.after(Timestamp.valueOf(closingdate.replace("T", " ")+":00"))){

@@ -7,9 +7,14 @@ pageEncoding="ISO-8859-1" import="com.cs336.pkg.*"%>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <link rel="stylesheet" type="text/css" href="css/index.css"/>
-<title>Password Forgot</title>
+<title>Remove Bid Page</title>
 </head>
 <body>
+
+<%if(session.getAttribute("username") == null){
+	response.sendRedirect("invalidated.jsp");
+} %>
+
 <%
 String emailParam = request.getParameter("email");
 String jewelryID = request.getParameter("jewelryID");

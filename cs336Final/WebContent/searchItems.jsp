@@ -11,6 +11,11 @@ pageEncoding="ISO-8859-1" import="com.cs336.pkg.*"%>
 <title>Search</title>
 </head>
 <body>
+
+<%if(session.getAttribute("username") == null){
+	response.sendRedirect("invalidated.jsp");
+} %>
+
 <b>Search for Jewelry</b>
 <br>
 <br>
@@ -85,7 +90,7 @@ pageEncoding="ISO-8859-1" import="com.cs336.pkg.*"%>
 <td>Sorting By</td><td><select name="sort" size=1>
 <option value=""></option>
 <option value="type">type</option>
-<option value="emailOfSeller">seller</option>
+<option value="emailOfSeller">emailOfSeller</option>
 <option value="size">size</option>
 <option value="color">color</option>
 </select></td>
@@ -97,7 +102,7 @@ pageEncoding="ISO-8859-1" import="com.cs336.pkg.*"%>
 
 
 </form>
-<p><a href='dash.jsp'>Back to basic Dashboard</a></p>
+<p><a href='dash.jsp'>Back to Buyer/Basic Dashboard</a></p>
 <p><a href='logout.jsp'>Log out</a></p>
 </body>
 </html>

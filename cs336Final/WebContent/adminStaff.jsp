@@ -10,6 +10,8 @@ pageEncoding="ISO-8859-1" import="com.cs336.pkg.*"%>
 <title>AS</title>
 </head>
 <body>
+
+
 <%
 String passwordParam = request.getParameter("password");
 String emailParam = request.getParameter("email");
@@ -51,5 +53,9 @@ out.println("Sorry! Your inputs were not in our system. Try again please!");
 	
 	
 %>
+
+<form method="post" action="index.jsp">
+<input type="submit" value="Back to log in" class="button">
+</form>
 </body>
 </html>

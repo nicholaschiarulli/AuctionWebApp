@@ -17,18 +17,21 @@ pageEncoding="ISO-8859-1" import="com.cs336.pkg.*"%>
 
 <%
 try{
-String emailParam = request.getParameter("email");
+String emailParam = ""+session.getAttribute("username");
 String newPasswordParam = request.getParameter("password");
+int removed = 1;
 ApplicationDB DB = new ApplicationDB();	
 Connection con = DB.getConnection();
-String str = "UPDATE customer SET password='"+newPasswordParam+"' where email = '"+emailParam+"';";
+String str = "UPDATE customer SET removed='"+removed+"' where email = '"+emailParam+"';";
 PreparedStatement ps = con.prepareStatement(str);
 ps.executeUpdate();
-out.println("Successfully reset the customer's password");
-} catch (Exception x){
-out.println("The password was too many characters. You cannot reset it to the requested new password");
+out.println("Successfully Deactivated Account!");
+session.invalidate();
+response.sendRedirect("index.jsp");
+} catch (Exception xx){
+out.println("Something went wrong and deactivation did not work.");
 }
 %>
-<a href='customerRepresentativePage.jsp'>Back to Customer Representative Page</a>
+<a href='dashjsp'>Back to Dashboard</a>
 </body>
 </html>

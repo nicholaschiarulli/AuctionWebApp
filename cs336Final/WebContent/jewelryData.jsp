@@ -10,6 +10,10 @@ pageEncoding="ISO-8859-1" import="com.cs336.pkg.*"%>
 <title>SearchItemsPage</title>
 </head>
 <body>
+<%if(session.getAttribute("username") == null){
+	response.sendRedirect("invalidated.jsp");
+} %>
+
 <h1>Jewelry available based off of your filters. If an item's status is OPEN then you can bid on it!</h1>
 
 <table border="4">

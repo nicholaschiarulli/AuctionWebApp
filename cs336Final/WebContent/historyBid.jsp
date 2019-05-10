@@ -11,6 +11,10 @@
 </head>
 <body>
 
+<%if(session.getAttribute("username") == null){
+	response.sendRedirect("invalidated.jsp");
+} %>
+
 <%
 int jewelryID = Integer.parseInt(request.getParameter("id"));%>
 
@@ -22,25 +26,36 @@ try {
 	Connection con = db.getConnection();
 	Statement stmt = con.createStatement();
 
-	String q = "select BidID, email, cost from Bid where jewelryID =" + jewelryID + ";";
-	ResultSet result = stmt.executeQuery(q);
+	String str = "select BidID, email, cost from Bid where jewelryID =" + jewelryID + ";";
+	ResultSet result = stmt.executeQuery(str);
 	if(result.next())
 	{%>
-	<table align="center" border="3">
+	<table border="4">
 			<tr>
 				<th>BidID</th>
 				<th>Bidder Email</th>
 				<th>Bid Amount</th>
-			</tr><%
-				do{%>
+				
+				
+			</tr>
+			
+			<tr>
+				<td><% out.println(result.getInt("BidID"));%></td>
+				<td><% out.println(result.getString("email"));%></td>
+				<td><% out.println(result.getFloat("cost"));%></td>
+				</tr>
+			<%
+			while(result.next()){%>
 				
 				<tr>
-				<td align = "center"><% out.println(result.getInt("BidID"));%></td>
-				<td align = "center"><% out.println(result.getString("email"));%></td>
-				<td align = "center"><% out.println(String.format("$%.2f",result.getFloat("cost")));%></td>
+				<td><% out.println(result.getInt("BidID"));%></td>
+				<td><% out.println(result.getString("email"));%></td>
+				<td><% out.println(result.getFloat("cost"));%></td>
 				</tr><%
-				}while(result.next());%>
-			</table><%
+				}%>
+			</table>
+			<br>
+			<%
 	}
    }
    catch (Exception ex)
@@ -48,6 +63,7 @@ try {
 out.println(ex);
 out.println("error");
 }
+out.print("<a href='jewelryPage.jsp?id=" + jewelryID + "'>Go back to Jewelry Item</a>");
 
 %></form>
 </body>

@@ -10,7 +10,12 @@ pageEncoding="ISO-8859-1" import="com.cs336.pkg.*"%>
 <title>SearchItemsPage</title>
 </head>
 <body>
-<h1>Jewelry available based off of your filters. If an item's status is OPEN then you can bid on it!</h1>
+
+<%if(session.getAttribute("username") == null){
+	response.sendRedirect("invalidated.jsp");
+} %>
+
+<h1>Jewelry Available Based off of your Filters. If an Item's Status is OPEN then you can Bid on it!</h1>
 
 <table border="4">
 <tr>
@@ -29,6 +34,7 @@ String sort = request.getParameter("sort");
 String thisWord =request.getParameter("thisWord");
 String condition = request.getParameter("condition");
 String color = request.getParameter("color");
+String size = request.getParameter("size");
 	
 if(thisWord.isEmpty()){
 	thisWord = "";
@@ -42,11 +48,17 @@ type = "";
 else {
 type = " and j.type = '"+type+"'";
 }
+if(size.isEmpty()){
+size = "";
+} 
+else {
+size = " and j.size = '"+size+"'";
+}
 if(condition.isEmpty()){
 condition = "";
 } 
 else {
-condition = " and j.condition='" + condition+"'";
+condition = " and j.conditionn='" + condition+"'";
 }
 if(color.isEmpty()){
 color = "";
@@ -61,7 +73,7 @@ else {
 sort = " order by "+ sort;
 }
 			
-String str = "SELECT j.jewelryID FROM jewelry as j WHERE j.status=0 or j.status=1"+thisWord+type+condition+color+sort;
+String str = "SELECT j.jewelryID FROM jewelry as j WHERE j.status=0 "+thisWord+type+condition+color+size+sort+"or j.status=1"+thisWord+type+condition+color+size+sort;
 ResultSet result = stmt.executeQuery(str);
 while(result.next()){
 int jewelry_ID=result.getInt("j.jewelryID");
@@ -74,11 +86,11 @@ String nameOfJewelry = result1.getString("j.name");
 int status = result1.getInt("j.status");
 String closingDate = result1.getString("iob.closingDate");
 String currentCost = "jewelry item has no bids";
-String str2 = "SELECT cb.cost FROM CurrentBid as cb join jewelry as j on cb.jewelryID = j.jewelryID WHERE j.jewelryID = " + id;
+String str2 = "SELECT cur.cost FROM CurrentBid as cur join jewelry as j on cur.jewelryID = j.jewelryID WHERE j.jewelryID = " + id;
 Statement stmt2 = con.createStatement();
 ResultSet result2 = stmt2.executeQuery(str2);
 if(result2.next()){
-currentCost = result2.getString("cb.cost");
+currentCost = result2.getString("cur.cost");
 }
 if(status==0){
 out.print("<tr><th><a href='jewelryPage.jsp?id=" + id + "'>NAME: "+ nameOfJewelry+ " ID: "+id+" </a></th>");

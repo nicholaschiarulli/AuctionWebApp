@@ -42,6 +42,13 @@ width: 250px;
   padding: 10px 10px;
    font-size: 16px;
 }
+
+.button:hover {
+background-color: red;
+color: white;
+
+}
+
 a {
   background-color: #729fcf;
   color: black;
@@ -57,16 +64,7 @@ a:hover {
 	color: white;
 	
 }
-.button1 {
-  display: block;
-width: 50px;
-  border: none;
-background-color: blue;
-  padding: 10px 10px;
-   font-size: 12px;
-  cursor: pointer;
- text-align: center; 
-}
+
 
 
 

@@ -10,6 +10,11 @@ pageEncoding="ISO-8859-1" import="com.cs336.pkg.*"%>
 <title>crForum</title>
 </head>
 <body>
+
+<%if(session.getAttribute("username") == null){
+	response.sendRedirect("invalidated.jsp");
+} %>
+
 <h1>Welcome <%out.print(session.getAttribute("username")); %></h1>
 <b>FORUM PAGE FOR QUESTIONS!</b>
 <br>

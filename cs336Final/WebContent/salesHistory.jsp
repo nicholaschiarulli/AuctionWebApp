@@ -10,6 +10,11 @@ pageEncoding="ISO-8859-1" import="com.cs336.pkg.*"%>
 <title>Sales History</title>
 </head>
 <body>
+
+<%if(session.getAttribute("username") == null){
+	response.sendRedirect("invalidated.jsp");
+} %>
+
 <h1>Sales History</h1>
 <%double earnings = 0.0;%>
 
@@ -20,26 +25,22 @@ ApplicationDB db = new ApplicationDB();
 Connection con = db.getConnection();
 Statement stmt = con.createStatement();
 
-String requested = request.getParameter("sales");
-if(requested.equals("1") == true)
+String sales = request.getParameter("sales");
+if(sales.equals("1") == true)
 {
 String str = "SELECT SUM(cost) 'Total Earnings' FROM Sold;";
 ResultSet result = stmt.executeQuery(str);
-if(result.next()){%>
-<h3>Total Earnings</h3>
-<table border="4">
-<tr>
-<th>Total Earnings</th>
-</tr><%
-
-do{
+if(result.next()){
 %>
+<h3>Total Earnings</h3>
 
-<tr>
-<td><% out.println(String.format("$%.2f",result.getFloat("Total Earnings")));%></td>
-</tr><%
-}while(result.next());%>
-</table><%
+<%
+
+
+
+
+ out.println("<h3>$ "+result.getFloat("Total Earnings")+"</h3>");
+
 }
 
 else{
@@ -47,9 +48,9 @@ else{
 }
 }
 
-else if(requested.equals("2") == true)
+else if(sales.equals("2") == true)
 {
-String str = "SELECT s.jewelryID, j.brand, j.name, SUM(s.cost) FROM Sold s, jewelry j where j.jewelryID = s.jewelryID GROUP BY s.jewelryID order by SUM(s.cost) DESC;";
+String str = "SELECT s.jewelryID, j.brand, j.name, SUM(s.cost) 'Earnings Per' FROM Sold s, jewelry j where j.jewelryID = s.jewelryID GROUP BY s.jewelryID order by SUM(s.cost) DESC;";
 ResultSet result = stmt.executeQuery(str);
 if(result.next()){%>
 <h3>Earnings Per Jewelry</h3>
@@ -63,16 +64,29 @@ if(result.next()){%>
 
 <th>Total Earnings</th>
 			
-</tr><%
-do{%>
+</tr>
+
+
 <tr>
 <td><% out.println(result.getString("s.jewelryID"));%></td>
 <td><% out.println(result.getString("j.brand"));%></td>
 <td><% out.println(result.getString("j.name"));%></td>
-<td><% out.println(String.format("$%.2f",result.getFloat("SUM(s.cost)")));%></td>
+<td><% out.println(result.getFloat("Earnings Per"));%></td>
+
+						
+</tr>
+<%
+while(result.next()){
+%>
+<tr>
+<td><% out.println(result.getString("s.jewelryID"));%></td>
+<td><% out.println(result.getString("j.brand"));%></td>
+<td><% out.println(result.getString("j.name"));%></td>
+<td><% out.println(result.getFloat("Earnings Per"));%></td>
 						
 </tr><%
-}while(result.next());%>
+}
+%>
 </table><%
 }
 	
@@ -81,9 +95,9 @@ out.println("There is not any data available for that currently.");
 }
 }
 
-else if(requested.equals("3") == true)
+else if(sales.equals("3") == true)
 {
-String str = "SELECT s.type, SUM(s.cost) FROM Sold s GROUP BY s.type;";
+String str = "SELECT s.type, SUM(s.cost)'Earnings Per Type' FROM Sold s GROUP BY s.type;";
 ResultSet result = stmt.executeQuery(str);
 if(result.next()){%>
 <h3>Earnings Per Types of Jewelry</h3>
@@ -91,16 +105,21 @@ if(result.next()){%>
 <tr>
 <th>Jewelry Type</th>
 <th>Earnings</th>
-</tr><%
+</tr>
+<tr>
+<td><% out.println(result.getString("s.type"));%></td>
+<td><% out.println(result.getFloat("Earnings Per Type"));%></td>
+</tr>
+<%
 			
-do{
+while(result.next()){
 %>
 <tr>
 <td><% out.println(result.getString("s.type"));%></td>
-<td><% out.println(String.format("$%.2f",result.getFloat("SUM(s.cost)")));%></td>
+<td><% out.println(result.getFloat("Earnings Per Type"));%></td>
 			
 </tr><%
-}while(result.next());%>
+}%>
 </table><%
 }
 
@@ -109,27 +128,33 @@ else{
 }
 }
 
-else if(requested.equals("4") == true)
+else if(sales.equals("4") == true)
 {
-String str = "SELECT email, SUM(cost) FROM Sold GROUP BY email order by email;";
+String str = "SELECT email, SUM(cost)'Sell' FROM Sold GROUP BY email ORDER BY email;";
 ResultSet result = stmt.executeQuery(str);
-if(result.next()){%>
+if(result.next()){
+%>
 <h3>Earnings Per Seller</h3>
 <table border="4">
 <tr>
-<th>Seller</th>
-<th>Earnings</th>
+<th>Seller's Email</th>
+<th>Seller's Earnings</th>
+</tr>
+<tr>
+<td><% out.println(result.getString("email"));%></td>
+<td><% out.println(result.getFloat("Sell"));%></td>
+			
 </tr>
 <%
 			
-do{
+while(result.next()){
 %>
 <tr>
 <td><% out.println(result.getString("email"));%></td>
-<td><% out.println(String.format("$%.2f",result.getFloat("SUM(cost)")));%></td>
+<td><% out.println(result.getFloat("Sell"));%></td>
 			
 </tr><%
-}while(result.next());%>
+}%>
 </table><%
 }
 		
@@ -138,11 +163,12 @@ out.println("There is not any data available for that currently.");
 }
 }
 	
-else if(requested.equals("5") == true)
+else if(sales.equals("5") == true)
 {
-String str = "SELECT s.jewelryID,j.name, COUNT(s.color), SUM(s.cost) FROM Sold s, jewelry j where j.jewelryID = s.jewelryID GROUP BY s.jewelryID order by SUM(s.cost) DESC;";
+String str = "SELECT s.jewelryID,j.name, COUNT(s.color)'itemSold', SUM(s.cost)'itemEarning' FROM Sold s, jewelry j where j.jewelryID = s.jewelryID GROUP BY s.jewelryID order by SUM(s.cost) DESC;";
 ResultSet result = stmt.executeQuery(str);
-if(result.next()){%>
+if(result.next()){
+%>
 <h3>Best Selling Jewelry Items from Best to Worst</h3>
 <table border ="4">
 <tr>
@@ -154,21 +180,29 @@ if(result.next()){%>
 
 <th>Total Earnings</th>
 			
-</tr><%
-do{%>
+</tr>
 <tr>
 <td><% out.println(result.getString("s.jewelryID"));%></td>
 <td><% out.println(result.getString("j.name"));%></td>
-<td><% out.println(result.getInt("COUNT(s.color)"));%></td>
-<td><% out.println(String.format("$%.2f",result.getFloat("SUM(s.cost)")));%></td>
+<td><% out.println(result.getInt("itemSold"));%></td>
+<td><% out.println(result.getFloat("itemEarning"));%></td>
+						
+</tr>
+<%
+while(result.next()){%>
+<tr>
+<td><% out.println(result.getString("s.jewelryID"));%></td>
+<td><% out.println(result.getString("j.name"));%></td>
+<td><% out.println(result.getInt("itemSold"));%></td>
+<td><% out.println(result.getFloat("itemEarning"));%></td>
 						
 </tr><%
-}while(result.next());%>
+}%>
 </table><%
 }
 }
 
-else if(requested.equals("6") == true)
+else if(sales.equals("6") == true)
 {
 String str = "SELECT b.email'Buyer_Email', COUNT(b.email)'Bids_Bought', SUM(s.cost)'amount_spent' FROM Buyer b, Sold as s where b.email = s.email GROUP BY Buyer_Email order by amount_spent DESC;";
 ResultSet result = stmt.executeQuery(str);
@@ -177,24 +211,33 @@ if(result.next())
 <h3>Best Buyers from Best to Worst</h3>
 <table border ="4">
 <tr>
-<th>Buyer Email</th>
+<th>Email of Buyer</th>
 
 <th>Number of Bought Bids</th>
 
 <th>Amount spent</th>
 			
-</tr><% 
-do 
-{%>
+</tr>
 <tr>
 <td><% out.println(result.getString("Buyer_Email"));%></td>
 
 <td><%out.println(result.getInt("Bids_Bought"));%></td>
 
-<td><%out.println(String.format("$%.2f",result.getFloat("amount_spent")));%></td>
+<td><%out.println(result.getFloat("amount_spent"));%></td>
+					
+</tr>
+<% 
+while (result.next()){
+%>
+<tr>
+<td><% out.println(result.getString("Buyer_Email"));%></td>
+
+<td><%out.println(result.getInt("Bids_Bought"));%></td>
+
+<td><%out.println(result.getFloat("amount_spent"));%></td>
 					
 </tr><%
-} while (result.next());
+} 
 %>
 </table>
 <%

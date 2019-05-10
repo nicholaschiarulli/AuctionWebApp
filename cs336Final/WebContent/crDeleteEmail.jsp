@@ -7,26 +7,32 @@ pageEncoding="ISO-8859-1" import="com.cs336.pkg.*"%>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <link rel="stylesheet" type="text/css" href="css/index.css"/>
-<title>reset</title>
+<title>Delete Email</title>
 </head>
 <body>
-
 <%if(session.getAttribute("username") == null){
 	response.sendRedirect("invalidated.jsp");
 } %>
 
 <%
+
 try{
-String emailParam = request.getParameter("email");
-String newPasswordParam = request.getParameter("password");
+
+	String fromCol = (request.getParameter("f"));
+	String toCol = (request.getParameter("t"));
+	String date_time = (request.getParameter("d"));
+
+	//out.print(date_time);
 ApplicationDB DB = new ApplicationDB();	
 Connection con = DB.getConnection();
-String str = "UPDATE customer SET password='"+newPasswordParam+"' where email = '"+emailParam+"';";
+String str = "DELETE FROM Email WHERE fromCol = '"+fromCol+"' and toCol = '"+toCol+"' and date_time = '"+date_time+"';";
 PreparedStatement ps = con.prepareStatement(str);
 ps.executeUpdate();
-out.println("Successfully reset the customer's password");
-} catch (Exception x){
-out.println("The password was too many characters. You cannot reset it to the requested new password");
+out.print("Successfully deleted email sent to you.");
+con.close();
+} 
+catch (Exception x){
+out.print("Something prevented you from deleting this email. Please try again.");
 }
 %>
 <a href='customerRepresentativePage.jsp'>Back to Customer Representative Page</a>

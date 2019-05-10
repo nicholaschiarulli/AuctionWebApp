@@ -11,6 +11,11 @@ pageEncoding="ISO-8859-1" import="com.cs336.pkg.*"%>
 <title>CR Page</title>
 </head>
 <body>
+
+<%if(session.getAttribute("username") == null){
+	response.sendRedirect("invalidated.jsp");
+} %>
+
 <ul>
   <li> <a href='jewelryData.jsp'>View Jewelry and IDs</a></li>
     <li><a href='CRforum.jsp'>Answer Questions on the Forum</a></li>
@@ -31,6 +36,7 @@ out.println("<h1>Hello Customer Representative  " + email_username+"</h1>");
 <td>Subject</td>
 <td>Content</td>
 <td>Time Sent</td>
+<td>Remove Email</td>
 </tr>
 <%
 ApplicationDB db = new ApplicationDB();	
@@ -46,11 +52,13 @@ String fromCol = result.getString("fromCol");
 String content = result.getString("content");
 String date_time = result.getString("date_time");
 String theSubject = result.getString("theSubject");
+String toCol = result.getString("toCol");
 out.print("<tr><th>" +fromCol + "</th>");
 out.print("<th>" + theSubject +"</th>");
 out.print("<th>"+content + "</th>");
-out.print("<th>"+date_time+"</th></tr>");  
-				
+out.print("<th>"+date_time+"</th>");  
+out.print("<th><a href='crDeleteEmail.jsp?f=" + fromCol+ "&t=" + toCol+ "&d=" + date_time+"'>Delete</a></th><tr>");   
+	
 }
 con.close();
 	

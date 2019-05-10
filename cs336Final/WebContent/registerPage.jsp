@@ -33,7 +33,7 @@ ps.setString(2, firstParam);
 ps.setString(3, lastParam);
 ps.setString(4, passwordParam);
 //ps.setString(5, sellerParam);
-out.print(sellerParam);
+//out.print(sellerParam);
 ps.executeUpdate();
 				
 if(sellerParam.equals("yes")){

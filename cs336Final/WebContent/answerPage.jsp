@@ -10,6 +10,10 @@ pageEncoding="ISO-8859-1" import="com.cs336.pkg.*"%>
 <title>answerPage</title>
 </head>
 <body>
+<%if(session.getAttribute("username") == null){
+	response.sendRedirect("invalidated.jsp");
+} %>
+
 <%
 String email_username = ""+session.getAttribute("username");
 try {

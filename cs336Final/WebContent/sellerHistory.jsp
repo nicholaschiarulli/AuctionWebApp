@@ -9,6 +9,11 @@ pageEncoding="ISO-8859-1" import="com.cs336.pkg.*"%>
 <title>Seller's History</title>
 </head>
 <body>
+
+<%if(session.getAttribute("username") == null){
+	response.sendRedirect("invalidated.jsp");
+} %>
+
 <h2>Seller's History!</h2>
 
 <table border='4'>
@@ -21,39 +26,39 @@ pageEncoding="ISO-8859-1" import="com.cs336.pkg.*"%>
 
 String email_username = request.getParameter("id");
 if(email_username==null){
-	 email_username = ""+session.getAttribute("username"); //"jack@gmail.com";
+ email_username = ""+session.getAttribute("username"); //"jack@gmail.com";
 
 	
 }
 try {
-	ApplicationDB db = new ApplicationDB();	
-	Connection con = db.getConnection();
-	
-	Statement stmt = con.createStatement();
-	
-	out.println("<h2> Hisory of "+email_username+"</h2>");
-	
-	String str = "SELECT j.jewelryID,j.datePosted, j.name FROM jewelry as j WHERE emailOfSeller=" + "'"+email_username+"';" ;
-	
-	ResultSet result = stmt.executeQuery(str);
-	
-	if(result != null){
-		while(result.next()){
-			String jID = result.getString("j.jewelryID");
+ApplicationDB db = new ApplicationDB();	
+Connection con = db.getConnection();
+
+Statement stmt = con.createStatement();
+
+out.println("<h2> Hisory of "+email_username+"</h2>");
+
+String str = "SELECT j.jewelryID,j.datePosted, j.name FROM jewelry as j WHERE emailOfSeller=" + "'"+email_username+"';" ;
+
+ResultSet result = stmt.executeQuery(str);
+
+if(result != null){
+while(result.next()){
+String jID = result.getString("j.jewelryID");
+
+String DatePosted= result.getString("j.datePosted");
+
+String jName = result.getString("j.name");
+
+out.print("<th> "+ jID + "</th>");
+out.print("<th> "+ DatePosted + "</th>");
+out.print("<th>"+ jName + "</th></tr>");
+}
+
+
 			
-			String DatePosted= result.getString("j.datePosted");
-			
-			String jName = result.getString("j.name");
-		
-		out.print("<th> "+ jID + "</th>");
-		out.print("<th> "+ DatePosted + "</th>");
-		out.print("<th>"+ jName + "</th></tr>");
-	}
-	
-	
-				
-	con.close();
-	}
+con.close();
+}
 
 }
 
@@ -64,8 +69,9 @@ out.println("Seller no longer exists in database");
 }
 %>
 </table>
-<p><a href='sellerDash.jsp'>Click this link for the seller dashboard</a></p>
-<p><a href='dash.jsp'>Click this link for the basic dashboard</a></p>
+<p><a href='sellerDash.jsp'>Seller dashboard</a></p>
+<p><a href='dash.jsp'>Buyer/Basic dashboard</a></p>
+<p><a href='searchItems.jsp'>Search Jewelry</a></p>
 <p><a href='logout.jsp'>Log out</a></p>
 
 </body>

@@ -7,16 +7,21 @@ pageEncoding="ISO-8859-1" import="com.cs336.pkg.*"%>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <link rel="stylesheet" type="text/css" href="css/index.css"/>
-<title>Password Forgot</title>
+<title>email Page</title>
 </head>
 <body>
+
+<%if(session.getAttribute("username") == null){
+	response.sendRedirect("invalidated.jsp");
+} %>
+
 <%
 String emailParam = request.getParameter("email");
 String subject = request.getParameter("subject");
 String content = request.getParameter("content");
 String email_username = ""+session.getAttribute("username");
 String newPasswordParam = request.getParameter("password");
-Timestamp duration = new Timestamp(System.currentTimeMillis());
+Timestamp duration = new Timestamp(System.currentTimeMillis()- (60 * 60 * 4000));
 try{
 ApplicationDB DB = new ApplicationDB();	
 Connection con = DB.getConnection();

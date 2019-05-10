@@ -12,6 +12,10 @@ pageEncoding="ISO-8859-1" import="com.cs336.pkg.*"%>
 </head>
 <body>
 
+<%if(session.getAttribute("username") == null){
+	response.sendRedirect("invalidated.jsp");
+} %>
+
 <% 
 	String username = session.getAttribute("username").toString();
 	String sub = request.getParameter("subject");

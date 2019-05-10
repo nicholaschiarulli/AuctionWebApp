@@ -10,6 +10,10 @@ pageEncoding="ISO-8859-1" import="com.cs336.pkg.*"%>
 <title>Remove Auction</title>
 </head>
 <body>
+<%if(session.getAttribute("username") == null){
+	response.sendRedirect("invalidated.jsp");
+} %>
+
 <%
 try{
 int jewelryID = Integer.parseInt(request.getParameter("jewelryID"));
@@ -19,6 +23,7 @@ String str = "DELETE FROM jewelry WHERE jewelryID = "+jewelryID+";";
 PreparedStatement ps = con.prepareStatement(str);
 ps.executeUpdate();
 out.print("Successfully removed this auction. No one can bid on it anymore!");
+con.close();
 } 
 catch (Exception x){
 out.print("Something prevented you from deleting this auction. Please try again.");
